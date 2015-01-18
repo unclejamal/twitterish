@@ -18,26 +18,29 @@ public class ReadingTimelineTest {
 
     private ReadTimeline readTimeline;
     private InMemoryMessages messages = new InMemoryMessages();
+    private SocialNetworker bob;
+    private SocialNetworker alice;
 
     @Before
     public void setUp() throws Exception {
+        alice = new SocialNetworker("Alice");
+        bob = new SocialNetworker("Bob");
         readTimeline = new ReadTimeline(messages);
     }
 
     @Test
     public void showsEmptyTimelineOfSocialNetworkerWhenNoMessagesHaveBeenPosted() {
-        SocialNetworker alice = new SocialNetworker("Alice");
         Timeline timeline = readTimeline.execute(alice);
         assertThat(timeline, hasNoMessages());
     }
 
     @Test
     public void showsTimelineWithMessagesPreviouslyAddedByASocialNetworker() {
-        SocialNetworker bob = new SocialNetworker("Bob");
-        messages.addMessage(new Message(bob, "Damn! We lost!", new Date(1)));
-        messages.addMessage(new Message(bob, "Good game though.", new Date(2)));
+        messages.addMessage(new Message(alice, "I love the weather today", new Date(1)));
+        messages.addMessage(new Message(bob, "Damn! We lost!", new Date(2)));
+        messages.addMessage(new Message(bob, "Good game though.", new Date(3)));
         Timeline timeline = readTimeline.execute(bob);
-        assertThat(timeline, hasMessages(new Message(bob, "Damn! We lost!", new Date(1)), new Message(bob, "Good game though.", new Date(2))));
+        assertThat(timeline, hasMessages(new Message(bob, "Damn! We lost!", new Date(2)), new Message(bob, "Good game though.", new Date(3))));
     }
 
     private Matcher<? super Timeline> hasMessages(final Message... messages) {
