@@ -28,14 +28,14 @@ public class ReadingTimelineTest {
     }
 
     @Test
-    public void readingEmptyTimeline() {
+    public void showsEmptyTimelineOfSocialNetworkerWhenNoMessagesHaveBeenPosted() {
         SocialNetworker alice = new SocialNetworker("Alice");
         Timeline timeline = readTimeline.execute(alice);
         assertThat(timeline, hasNoMessages());
     }
 
     @Test
-    public void readingATimelineWithMultipleMessages() {
+    public void showsTimelineWithMessagesPreviouslyAddedByASocialNetworker() {
         SocialNetworker bob = new SocialNetworker("Bob");
         messages.addMessage(new Message(bob, "Damn! We lost!", new Date(1)));
         messages.addMessage(new Message(bob, "Good game though.", new Date(2)));
