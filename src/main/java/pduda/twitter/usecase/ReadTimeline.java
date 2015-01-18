@@ -1,8 +1,8 @@
-package pduda.usecase;
+package pduda.twitter.usecase;
 
-import pduda.Messages;
-import pduda.SocialNetworker;
-import pduda.Timeline;
+import pduda.twitter.Messages;
+import pduda.twitter.SocialNetworker;
+import pduda.twitter.Timeline;
 
 public class ReadTimeline {
 

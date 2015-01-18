@@ -1,4 +1,4 @@
-package pduda;
+package pduda.twitter;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,11 +1,16 @@
-package pduda;
+package pduda.twitter.acceptance;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
+import org.hamcrest.MatcherAssert;
 import org.hamcrest.TypeSafeMatcher;
 import org.junit.Before;
 import org.junit.Test;
-import pduda.usecase.ReadTimeline;
+import pduda.twitter.Message;
+import pduda.twitter.Messages;
+import pduda.twitter.SocialNetworker;
+import pduda.twitter.Timeline;
+import pduda.twitter.usecase.ReadTimeline;
 
 import java.util.Arrays;
 import java.util.Date;
