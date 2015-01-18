@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import pduda.twitter.domain.Message;
 import pduda.twitter.domain.SocialNetworker;
+import pduda.twitter.infrastructure.InMemoryMessages;
 
 import java.io.*;
 import java.util.Date;
@@ -16,6 +17,7 @@ public class ReadingTimelineUiTest {
     public static final String PROMPT = "> ";
     private PrintWriter inWriter;
     private BufferedReader outReader;
+    private InMemoryMessages messages;
 
     @Before
     public void startApplication() throws Exception {
@@ -27,12 +29,15 @@ public class ReadingTimelineUiTest {
         BufferedReader in = new BufferedReader(new InputStreamReader(new PipedInputStream(inStream)));
         PrintWriter out = new PrintWriter(new PipedOutputStream(outStream), true);
 
-        new Thread(new TwitterApplication(in, out)).start();
+        messages = new InMemoryMessages();
+        new Thread(new TwitterApplication(in, out, messages)).start();
     }
 
     @Test(timeout = 1000)
     public void journey() throws IOException {
-
+        messages.addMessage(new Message(new SocialNetworker("Alice"), "I love the weather today", new Date(1)));
+        messages.addMessage(new Message(new SocialNetworker("Bob"), "Damn! We lost!", new Date(2)));
+        messages.addMessage(new Message(new SocialNetworker("Bob"), "Good game though.", new Date(3)));
 
         enter("Alice");
         assertOutputLines(
