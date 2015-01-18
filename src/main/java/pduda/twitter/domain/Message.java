@@ -17,6 +17,18 @@ public class Message {
         return socialNetworker.equals(this.socialNetworker);
     }
 
+    public SocialNetworker getSocialNetworker() {
+        return socialNetworker;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

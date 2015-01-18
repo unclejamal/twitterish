@@ -1,6 +1,8 @@
 package pduda.twitter.domain;
 
 import java.util.List;
+import java.util.function.Consumer;
+import java.util.stream.Stream;
 
 public class Timeline {
     private List<Message> messages;
@@ -15,6 +17,10 @@ public class Timeline {
 
     public boolean containsAll(List<Message> queriedMessages) {
         return this.messages.equals(queriedMessages);
+    }
+
+    public void forEachMessage(Consumer<Message> block) {
+        messages.forEach(block::accept);
     }
 
     @Override
