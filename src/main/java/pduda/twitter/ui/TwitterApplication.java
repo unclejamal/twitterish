@@ -22,6 +22,8 @@ public class TwitterApplication implements Runnable {
         this.out = out;
         InMemoryMessages messages = new InMemoryMessages();
         messages.addMessage(new Message(new SocialNetworker("Alice"), "I love the weather today", new Date(1)));
+        messages.addMessage(new Message(new SocialNetworker("Bob"), "Damn! We lost!", new Date(2)));
+        messages.addMessage(new Message(new SocialNetworker("Bob"), "Good game though.", new Date(3)));
         theController = new TheController(new ReadTimeline(messages), new TheView(out));
     }
 

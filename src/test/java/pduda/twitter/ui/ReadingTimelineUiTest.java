@@ -31,8 +31,15 @@ public class ReadingTimelineUiTest {
     @Test(timeout = 1000)
     public void journey() throws IOException {
         execute("Alice");
+        readLines(
+                "I love the weather today (5 minutes ago)"
+        );
 
-        readLines("I love the weather today (5 minutes ago)");
+        execute("Bob");
+        readLines(
+                "Damn! We lost!",
+                "Good game though."
+        );
 
         execute("quit");
     }
