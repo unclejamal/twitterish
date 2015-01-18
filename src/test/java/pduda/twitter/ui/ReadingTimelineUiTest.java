@@ -1,10 +1,12 @@
 package pduda.twitter.ui;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import pduda.twitter.domain.Message;
+import pduda.twitter.domain.SocialNetworker;
 
 import java.io.*;
+import java.util.Date;
 
 import static java.lang.System.lineSeparator;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -30,21 +32,23 @@ public class ReadingTimelineUiTest {
 
     @Test(timeout = 1000)
     public void journey() throws IOException {
-        execute("Alice");
-        readLines(
+
+
+        enter("Alice");
+        assertOutputLines(
                 "I love the weather today (5 minutes ago)"
         );
 
-        execute("Bob");
-        readLines(
-                "Damn! We lost!",
-                "Good game though."
+        enter("Bob");
+        assertOutputLines(
+                "Damn! We lost! (5 minutes ago)",
+                "Good game though. (5 minutes ago)"
         );
 
-        execute("quit");
+        enter("quit");
     }
 
-    private void execute(String command) throws IOException {
+    private void enter(String command) throws IOException {
         read(PROMPT);
         write(command);
     }
@@ -56,7 +60,7 @@ public class ReadingTimelineUiTest {
         assertThat(String.valueOf(buffer), is(expectedOutput));
     }
 
-    private void readLines(String... expectedOutput) throws IOException {
+    private void assertOutputLines(String... expectedOutput) throws IOException {
         for (String line : expectedOutput) {
             read(line + lineSeparator());
         }
