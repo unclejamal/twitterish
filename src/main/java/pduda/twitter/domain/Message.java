@@ -13,7 +13,7 @@ public class Message {
         this.date = date;
     }
 
-    public boolean isForSocialNetworker(SocialNetworker socialNetworker) {
+    public boolean hasBeenPostedBy(SocialNetworker socialNetworker) {
         return socialNetworker.equals(this.socialNetworker);
     }
 

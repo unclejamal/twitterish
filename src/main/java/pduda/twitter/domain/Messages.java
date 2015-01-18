@@ -19,7 +19,7 @@ public class Messages {
 
     public List<Message> getMessagesFor(SocialNetworker socialNetworker) {
         return messages.stream()
-                .filter(m -> m.isForSocialNetworker(socialNetworker))
+                .filter(m -> m.hasBeenPostedBy(socialNetworker))
                 .collect(toList());
     }
 }
