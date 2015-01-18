@@ -5,10 +5,8 @@ import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 import org.junit.Before;
 import org.junit.Test;
-import pduda.twitter.domain.Message;
-import pduda.twitter.domain.Messages;
-import pduda.twitter.domain.SocialNetworker;
-import pduda.twitter.domain.Timeline;
+import pduda.twitter.domain.*;
+import pduda.twitter.infrastructure.InMemoryMessages;
 import pduda.twitter.usecase.ReadTimeline;
 
 import java.util.Arrays;
@@ -19,7 +17,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class ReadingTimelineTest {
 
     private ReadTimeline readTimeline;
-    private Messages messages = new Messages();
+    private InMemoryMessages messages = new InMemoryMessages();
 
     @Before
     public void setUp() throws Exception {
