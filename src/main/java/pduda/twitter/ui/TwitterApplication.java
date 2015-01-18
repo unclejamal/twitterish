@@ -1,7 +1,5 @@
 package pduda.twitter.ui;
 
-import pduda.twitter.domain.SocialNetworker;
-import pduda.twitter.domain.Timeline;
 import pduda.twitter.infrastructure.InMemoryMessages;
 import pduda.twitter.usecase.ReadTimeline;
 
@@ -15,16 +13,16 @@ public class TwitterApplication implements Runnable {
     private final PrintWriter out;
     private TheController theController;
 
-    public TwitterApplication(BufferedReader in, PrintWriter out, InMemoryMessages messages) {
+    public TwitterApplication(BufferedReader in, PrintWriter out, InMemoryMessages messages, Clock clock) {
         this.in = in;
         this.out = out;
-        theController = new TheController(new ReadTimeline(messages), new TheView(out));
+        this.theController = new TheController(new ReadTimeline(messages), new TheView(new ConsoleOutput(out)));
     }
 
     public static void main(String[] args) throws Exception {
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
         PrintWriter out = new PrintWriter(System.out);
-        new Thread(new TwitterApplication(in, out, new InMemoryMessages())).start();
+        new Thread(new TwitterApplication(in, out, new InMemoryMessages(), new RealClock())).start();
     }
 
     @Override
@@ -42,38 +40,6 @@ public class TwitterApplication implements Runnable {
                 break;
             }
             theController.commandEntered(command);
-        }
-    }
-
-    private static class TheController {
-
-        private ReadTimeline readTimeline;
-        private TheView theView;
-
-        public TheController(ReadTimeline readTimeline, TheView theView) {
-            this.readTimeline = readTimeline;
-            this.theView = theView;
-        }
-
-        public void commandEntered(String command) {
-            Timeline timeline = readTimeline.execute(new SocialNetworker(command));
-
-            theView.present(timeline);
-        }
-    }
-
-    private static class TheView {
-        private PrintWriter out;
-
-        public TheView(PrintWriter out) {
-            this.out = out;
-        }
-
-        public void present(Timeline timeline) {
-            timeline.forEachMessage(message -> {
-                out.printf("%s (%s ago)%n", message.getContent(), "5 minutes");
-                out.flush();
-            });
         }
     }
 

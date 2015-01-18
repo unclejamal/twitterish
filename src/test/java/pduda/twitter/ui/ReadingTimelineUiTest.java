@@ -7,9 +7,15 @@ import pduda.twitter.domain.SocialNetworker;
 import pduda.twitter.infrastructure.InMemoryMessages;
 
 import java.io.*;
+import java.time.LocalDateTime;
+import java.time.Month;
+import java.time.Year;
+import java.time.ZoneOffset;
 import java.util.Date;
 
 import static java.lang.System.lineSeparator;
+import static java.time.Month.JANUARY;
+import static java.time.ZoneOffset.UTC;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
@@ -18,6 +24,7 @@ public class ReadingTimelineUiTest {
     private PrintWriter inWriter;
     private BufferedReader outReader;
     private InMemoryMessages messages;
+    private FixedClock clock;
 
     @Before
     public void startApplication() throws Exception {
@@ -30,14 +37,20 @@ public class ReadingTimelineUiTest {
         PrintWriter out = new PrintWriter(new PipedOutputStream(outStream), true);
 
         messages = new InMemoryMessages();
-        new Thread(new TwitterApplication(in, out, messages)).start();
+        clock = new FixedClock();
+        new Thread(new TwitterApplication(in, out, messages, clock)).start();
     }
 
     @Test(timeout = 1000)
     public void journey() throws IOException {
-        messages.addMessage(new Message(new SocialNetworker("Alice"), "I love the weather today", new Date(1)));
-        messages.addMessage(new Message(new SocialNetworker("Bob"), "Damn! We lost!", new Date(2)));
-        messages.addMessage(new Message(new SocialNetworker("Bob"), "Good game though.", new Date(3)));
+        clock.fixAt(Year.of(2015).atMonth(JANUARY).atDay(30).atTime(10, 0).toInstant(UTC));
+
+        messages.addMessage(new Message(new SocialNetworker("Alice"), "I love the weather today",
+                Date.from(Year.of(2015).atMonth(JANUARY).atDay(30).atTime(9, 55).toInstant(UTC))));
+        messages.addMessage(new Message(new SocialNetworker("Bob"), "Damn! We lost!",
+                Date.from(Year.of(2015).atMonth(JANUARY).atDay(30).atTime(9, 58).toInstant(UTC))));
+        messages.addMessage(new Message(new SocialNetworker("Bob"), "Good game though.",
+                Date.from(Year.of(2015).atMonth(JANUARY).atDay(30).atTime(9, 59).toInstant(UTC))));
 
         enter("Alice");
         assertOutputLines(
@@ -74,5 +87,4 @@ public class ReadingTimelineUiTest {
     private void write(String input) {
         inWriter.println(input);
     }
-
 }
