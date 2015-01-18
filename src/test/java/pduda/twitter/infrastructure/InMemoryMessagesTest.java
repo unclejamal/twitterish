@@ -1,5 +1,6 @@
 package pduda.twitter.infrastructure;
 
+import org.junit.Before;
 import org.junit.Test;
 import pduda.twitter.domain.Message;
 import pduda.twitter.domain.SocialNetworker;
@@ -13,18 +14,24 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 
 public class InMemoryMessagesTest {
+
+    private InMemoryMessages messages;
+    private SocialNetworker bob;
+
+    @Before
+    public void setUp() throws Exception {
+        messages = new InMemoryMessages();
+        bob = new SocialNetworker("bob");
+    }
+
     @Test
     public void getsNoMessagesForSocialNetworkThatHasNotPostedYet() {
-        InMemoryMessages messages = new InMemoryMessages();
-
-        List<Message> messagesForBob = messages.getMessagesFor(new SocialNetworker("bob"));
+        List<Message> messagesForBob = messages.getMessagesFor(bob);
 
         assertThat(messagesForBob, is(org.hamcrest.Matchers.empty()));
     }
     @Test
     public void getsMessagesForSocialNetworkerThatHasAlreadyPosted() {
-        SocialNetworker bob = new SocialNetworker("bob");
-        InMemoryMessages messages = new InMemoryMessages();
         Message bobsMessage1 = new Message(bob, "content 1", new Date(1));
         Message bobsMessage2 = new Message(bob, "content 2", new Date(2));
         messages.addMessage(bobsMessage1);
