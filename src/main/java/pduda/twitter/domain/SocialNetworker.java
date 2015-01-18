@@ -1,4 +1,4 @@
-package pduda.twitter;
+package pduda.twitter.domain;
 
 public class SocialNetworker {
     private String username;

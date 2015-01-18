@@ -1,4 +1,4 @@
-package pduda.twitter;
+package pduda.twitter.domain;
 
 import java.util.Date;
 
@@ -11,6 +11,10 @@ public class Message {
         this.socialNetworker = socialNetworker;
         this.content = content;
         this.date = date;
+    }
+
+    public boolean isForSocialNetworker(SocialNetworker socialNetworker) {
+        return socialNetworker.equals(this.socialNetworker);
     }
 
     @Override
@@ -43,9 +47,5 @@ public class Message {
                 ", content='" + content + '\'' +
                 ", date=" + date +
                 '}';
-    }
-
-    public boolean isForSocialNetworker(SocialNetworker socialNetworker) {
-        return socialNetworker.equals(this.socialNetworker);
     }
 }

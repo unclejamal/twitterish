@@ -2,14 +2,13 @@ package pduda.twitter.acceptance;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
-import org.hamcrest.MatcherAssert;
 import org.hamcrest.TypeSafeMatcher;
 import org.junit.Before;
 import org.junit.Test;
-import pduda.twitter.Message;
-import pduda.twitter.Messages;
-import pduda.twitter.SocialNetworker;
-import pduda.twitter.Timeline;
+import pduda.twitter.domain.Message;
+import pduda.twitter.domain.Messages;
+import pduda.twitter.domain.SocialNetworker;
+import pduda.twitter.domain.Timeline;
 import pduda.twitter.usecase.ReadTimeline;
 
 import java.util.Arrays;
