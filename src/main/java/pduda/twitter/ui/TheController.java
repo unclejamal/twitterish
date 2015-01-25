@@ -7,16 +7,16 @@ import pduda.twitter.usecase.ReadTimeline;
 public class TheController {
 
     private ReadTimeline readTimeline;
-    private TheView theView;
+    private ReadTimelineView readTimelineView;
 
-    public TheController(ReadTimeline readTimeline, TheView theView) {
+    public TheController(ReadTimeline readTimeline, ReadTimelineView readTimelineView) {
         this.readTimeline = readTimeline;
-        this.theView = theView;
+        this.readTimelineView = readTimelineView;
     }
 
     public void commandEntered(String command) {
         Timeline timeline = readTimeline.execute(new SocialNetworker(command));
 
-        theView.present(timeline);
+        readTimelineView.present(timeline);
     }
 }

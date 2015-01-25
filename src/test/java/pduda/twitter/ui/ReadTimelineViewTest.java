@@ -12,10 +12,10 @@ import java.time.Instant;
 import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
 
-public class TheViewTest {
+public class ReadTimelineViewTest {
 
     private ConsoleOutput output;
-    private TheView view;
+    private ReadTimelineView view;
     private TimeElapsedView timeElapsedView;
 
     @Before
@@ -23,7 +23,7 @@ public class TheViewTest {
         output = Mockito.mock(ConsoleOutput.class);
         timeElapsedView = Mockito.mock(TimeElapsedView.class);
 
-        view = new TheView(output, timeElapsedView);
+        view = new ReadTimelineView(output, timeElapsedView);
     }
 
     @Test

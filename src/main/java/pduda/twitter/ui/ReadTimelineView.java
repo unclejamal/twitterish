@@ -2,11 +2,11 @@ package pduda.twitter.ui;
 
 import pduda.twitter.domain.Timeline;
 
-public class TheView {
+public class ReadTimelineView {
     private final TimeElapsedView timeElapsedView;
     private ConsoleOutput output;
 
-    public TheView(ConsoleOutput output, TimeElapsedView timeElapsedView) {
+    public ReadTimelineView(ConsoleOutput output, TimeElapsedView timeElapsedView) {
         this.output = output;
         this.timeElapsedView = timeElapsedView;
     }
