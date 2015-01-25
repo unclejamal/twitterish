@@ -14,7 +14,7 @@ public class TwitterApplication implements Runnable {
     public TwitterApplication(BufferedReader in, InMemoryMessages messages, Clock clock, ConsoleOutput output) {
         this.in = in;
         this.output = output;
-        this.theController = new TheController(new ReadTimeline(messages), new ReadTimelineView(output, new TimeElapsedView(new RealClock())));
+        this.theController = new TheController(new ReadTimeline(messages), new ReadTimelineView(output, new TimeElapsedView(clock)));
     }
 
     @Override

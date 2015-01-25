@@ -34,9 +34,18 @@ public class ReadTimelineViewTest {
 
     @Test
     public void outputsMessagesForNonEmptyTimelines() {
-        // TODO fix now
-        view.present(new Timeline(asList(new Message(new SocialNetworker("bob"), "content", Instant.now()))));
-        Mockito.verify(output).writeLineAndFlush("content (5 minutes ago)");
+        Instant publicationDate = somePublicationDate();
+
+        Mockito.when(timeElapsedView.since(publicationDate)).thenReturn("3 minutes ago");
+
+        view.present(new Timeline(asList(
+                new Message(new SocialNetworker("bob"), "content", publicationDate))));
+
+        Mockito.verify(output).writeLineAndFlush("content (3 minutes ago)");
+    }
+
+    private Instant somePublicationDate() {
+        return Instant.now();
     }
 
 }

@@ -5,12 +5,12 @@ import java.time.Instant;
 public class Message {
     private final SocialNetworker socialNetworker;
     private final String content;
-    private final Instant date;
+    private final Instant publicationDate;
 
     public Message(SocialNetworker socialNetworker, String content, Instant publicationDate) {
         this.socialNetworker = socialNetworker;
         this.content = content;
-        this.date = publicationDate;
+        this.publicationDate = publicationDate;
     }
 
     public boolean hasBeenPostedBy(SocialNetworker socialNetworker) {
@@ -26,7 +26,7 @@ public class Message {
     }
 
     public Instant getPublicationDate() {
-        return date;
+        return publicationDate;
     }
 
     @Override
@@ -37,7 +37,7 @@ public class Message {
         Message message = (Message) o;
 
         if (content != null ? !content.equals(message.content) : message.content != null) return false;
-        if (date != null ? !date.equals(message.date) : message.date != null) return false;
+        if (publicationDate != null ? !publicationDate.equals(message.publicationDate) : message.publicationDate != null) return false;
         if (socialNetworker != null ? !socialNetworker.equals(message.socialNetworker) : message.socialNetworker != null)
             return false;
 
@@ -48,7 +48,7 @@ public class Message {
     public int hashCode() {
         int result = socialNetworker != null ? socialNetworker.hashCode() : 0;
         result = 31 * result + (content != null ? content.hashCode() : 0);
-        result = 31 * result + (date != null ? date.hashCode() : 0);
+        result = 31 * result + (publicationDate != null ? publicationDate.hashCode() : 0);
         return result;
     }
 
@@ -57,7 +57,7 @@ public class Message {
         return "Message{" +
                 "socialNetworker=" + socialNetworker +
                 ", content='" + content + '\'' +
-                ", date=" + date +
+                ", publicationDate=" + publicationDate +
                 '}';
     }
 }

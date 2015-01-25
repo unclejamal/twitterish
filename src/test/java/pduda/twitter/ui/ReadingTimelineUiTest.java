@@ -55,8 +55,8 @@ public class ReadingTimelineUiTest {
 
         enter("Bob");
         assertOutputLines(
-                "Damn! We lost! (5 minutes ago)",
-                "Good game though. (5 minutes ago)"
+                "Damn! We lost! (2 minutes ago)",
+                "Good game though. (1 minute ago)"
         );
 
         enter("quit");
