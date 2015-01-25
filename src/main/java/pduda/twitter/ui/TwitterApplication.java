@@ -9,12 +9,12 @@ import java.io.IOException;
 public class TwitterApplication implements Runnable {
     private final BufferedReader in;
     private final ConsoleOutput output;
-    private final TheController theController;
+    private final ReadTimelineController readTimelineController;
 
     public TwitterApplication(BufferedReader in, Messages messages, Clock clock, ConsoleOutput output) {
         this.in = in;
         this.output = output;
-        this.theController = new TheController(
+        this.readTimelineController = new ReadTimelineController(
                 new ReadTimeline(messages),
                 new ReadTimelineView(
                         output,
@@ -36,7 +36,7 @@ public class TwitterApplication implements Runnable {
             if (command.equals("quit")) {
                 break;
             }
-            theController.commandEntered(command);
+            readTimelineController.commandEntered(command);
         }
     }
 
