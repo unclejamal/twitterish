@@ -37,7 +37,10 @@ public class TwitterApplication implements Runnable {
             if (command.equals("quit")) {
                 break;
             }
-            readTimelineController.commandEntered(command);
+
+
+            // TODO inject
+            new ConsoleRouter(readTimelineController, null).execute(command);
         }
     }
 
