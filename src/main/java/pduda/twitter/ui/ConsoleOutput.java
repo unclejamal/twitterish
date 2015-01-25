@@ -14,4 +14,9 @@ public class ConsoleOutput {
         out.println(line);
         out.flush();
     }
+
+    public void showPrompt() {
+        out.print("> ");
+        out.flush();
+    }
 }

@@ -10,26 +10,25 @@ import java.io.PrintWriter;
 
 public class TwitterApplication implements Runnable {
     private final BufferedReader in;
-    private final PrintWriter out;
+    private final ConsoleOutput output;
     private TheController theController;
 
-    public TwitterApplication(BufferedReader in, PrintWriter out, InMemoryMessages messages, Clock clock) {
+    public TwitterApplication(BufferedReader in, InMemoryMessages messages, Clock clock, ConsoleOutput output) {
         this.in = in;
-        this.out = out;
-        this.theController = new TheController(new ReadTimeline(messages), new TheView(new ConsoleOutput(out)));
+        this.output = output;
+        this.theController = new TheController(new ReadTimeline(messages), new TheView(output));
     }
 
     public static void main(String[] args) throws Exception {
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
         PrintWriter out = new PrintWriter(System.out);
-        new Thread(new TwitterApplication(in, out, new InMemoryMessages(), new RealClock())).start();
+        new Thread(new TwitterApplication(in, new InMemoryMessages(), new RealClock(), new ConsoleOutput(out))).start();
     }
 
     @Override
     public void run() {
         while (true) {
-            out.print("> ");
-            out.flush();
+            output.showPrompt();
             String command;
             try {
                 command = in.readLine();

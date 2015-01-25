@@ -7,10 +7,7 @@ import pduda.twitter.domain.SocialNetworker;
 import pduda.twitter.infrastructure.InMemoryMessages;
 
 import java.io.*;
-import java.time.LocalDateTime;
-import java.time.Month;
 import java.time.Year;
-import java.time.ZoneOffset;
 import java.util.Date;
 
 import static java.lang.System.lineSeparator;
@@ -38,7 +35,7 @@ public class ReadingTimelineUiTest {
 
         messages = new InMemoryMessages();
         clock = new FixedClock();
-        new Thread(new TwitterApplication(in, out, messages, clock)).start();
+        new Thread(new TwitterApplication(in, messages, clock, new ConsoleOutput(out))).start();
     }
 
     @Test(timeout = 1000)
