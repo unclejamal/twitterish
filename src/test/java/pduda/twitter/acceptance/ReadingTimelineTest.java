@@ -11,10 +11,8 @@ import pduda.twitter.domain.Timeline;
 import pduda.twitter.persistence.InMemoryMessages;
 import pduda.twitter.usecase.ReadTimeline;
 
-import java.time.Year;
 import java.util.Arrays;
 
-import static java.time.Month.JANUARY;
 import static java.time.ZoneOffset.UTC;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static pduda.twitter.util.ObjectMother.someDay;
@@ -22,7 +20,7 @@ import static pduda.twitter.util.ObjectMother.someDay;
 public class ReadingTimelineTest {
 
     private ReadTimeline readTimeline;
-    private InMemoryMessages messages = new InMemoryMessages();
+    private InMemoryMessages messages;
     private SocialNetworker bob;
     private SocialNetworker alice;
 
@@ -30,6 +28,8 @@ public class ReadingTimelineTest {
     public void setUp() throws Exception {
         alice = new SocialNetworker("Alice");
         bob = new SocialNetworker("Bob");
+        messages = new InMemoryMessages();
+
         readTimeline = new ReadTimeline(messages);
     }
 
@@ -47,10 +47,8 @@ public class ReadingTimelineTest {
 
         Timeline timeline = readTimeline.execute(bob);
         assertThat(timeline, hasMessages(
-                new Message(bob, "Damn! We lost!",
-                        Year.of(2015).atMonth(JANUARY).atDay(30).atTime(9, 58).toInstant(UTC)),
-                new Message(bob, "Good game though.",
-                        Year.of(2015).atMonth(JANUARY).atDay(30).atTime(9, 59).toInstant(UTC))));
+                new Message(bob, "Damn! We lost!", someDay().atTime(9, 58).toInstant(UTC)),
+                new Message(bob, "Good game though.", someDay().atTime(9, 59).toInstant(UTC))));
     }
 
     private Matcher<? super Timeline> hasMessages(final Message... messages) {
