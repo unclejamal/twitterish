@@ -16,11 +16,14 @@ public class TheViewTest {
 
     private ConsoleOutput output;
     private TheView view;
+    private TimeElapsedView timeElapsedView;
 
     @Before
     public void setUp() throws Exception {
         output = Mockito.mock(ConsoleOutput.class);
-        view = new TheView(output, new TheView.TimeElapsedView());
+        timeElapsedView = Mockito.mock(TimeElapsedView.class);
+
+        view = new TheView(output, timeElapsedView);
     }
 
     @Test
