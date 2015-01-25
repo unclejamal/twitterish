@@ -20,7 +20,7 @@ public class TheViewTest {
     @Before
     public void setUp() throws Exception {
         output = Mockito.mock(ConsoleOutput.class);
-        view = new TheView(output);
+        view = new TheView(output, new TheView.TimeElapsedView());
     }
 
     @Test
