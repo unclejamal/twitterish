@@ -2,7 +2,6 @@ package pduda.twitter.journey;
 
 import org.junit.Before;
 import org.junit.Test;
-import pduda.twitter.domain.SocialNetworker;
 import pduda.twitter.main.TwitterApplication;
 import pduda.twitter.persistence.InMemoryMessages;
 import pduda.twitter.ui.ConsoleOutput;
@@ -19,8 +18,6 @@ import static pduda.twitter.util.ObjectMother.someDay;
 
 public class PostingMessagesToTimelineUiTest {
     public static final String PROMPT = "> ";
-    public static final SocialNetworker alice = new SocialNetworker("Alice");
-    public static final SocialNetworker bob = new SocialNetworker("Bob");
     private PrintWriter inWriter;
     private BufferedReader outReader;
     private InMemoryMessages messages;
@@ -44,9 +41,7 @@ public class PostingMessagesToTimelineUiTest {
     @Test(timeout = 1000)
     public void postMessagesToTheTimeline() throws Exception {
         enter("Alice -> I love the weather today", whenTimeIs(someDay().atTime(9, 55)));
-
         enter("Bob -> Damn! We lost!", whenTimeIs(someDay().atTime(9, 58)));
-
         enter("Bob -> Good game though.", whenTimeIs(someDay().atTime(9, 59)));
 
         enter("Alice", whenTimeIs(someDay().atTime(10, 0)));

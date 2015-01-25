@@ -19,14 +19,12 @@ public class PostingMessageTest {
 
     private PostMessage postMessage;
     private Messages messages;
-    private SocialNetworker bob;
     private SocialNetworker alice;
     private FixedClock clock;
 
     @Before
     public void setUp() throws Exception {
         alice = new SocialNetworker("Alice");
-        bob = new SocialNetworker("Bob");
         messages = new InMemoryMessages();
         clock = new FixedClock();
 
