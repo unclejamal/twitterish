@@ -9,13 +9,13 @@ import static pduda.twitter.util.ObjectMother.somePublicationDate;
 
 public class MessageTest {
 
-    private SocialNetworker networker;
+    private SocialNetworker alice;
     private SocialNetworker bob;
     private Message messagePostedByBob;
 
     @Before
     public void setUp() throws Exception {
-        networker = new SocialNetworker("alice");
+        alice = new SocialNetworker("alice");
         bob = new SocialNetworker("bob");
         messagePostedByBob = new Message(bob, "content", somePublicationDate());
     }
@@ -27,6 +27,6 @@ public class MessageTest {
 
     @Test
     public void tellsTheMessageHasNotBeenPostedByADifferentSocialNetworker() {
-        assertThat(messagePostedByBob.hasBeenPostedBy(networker), is(false));
+        assertThat(messagePostedByBob.hasBeenPostedBy(alice), is(false));
     }
 }
