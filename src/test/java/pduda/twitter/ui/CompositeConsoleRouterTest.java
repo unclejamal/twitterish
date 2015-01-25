@@ -9,23 +9,31 @@ import pduda.twitter.domain.SocialNetworker;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
-public class ConsoleRouterTest {
+public class CompositeConsoleRouterTest {
 
     private static final SocialNetworker alice = new SocialNetworker("Alice");
+    private static final SocialNetworker bob = new SocialNetworker("Bob");
     private ReadTimelineController readTimelineController;
     private PostMessageController postMessageController;
     private WallController wallController;
+    private FollowController followController;
     private ArgumentCaptor<SocialNetworker> actualSocialNetworker;
     private ArgumentCaptor<String> actualMessage;
 
-    private ConsoleRouter consoleRouter;
+    private CompositeConsoleRouter compositeConsoleRouter;
 
     @Before
-    public void setUp(){
+    public void setUp() {
         readTimelineController = Mockito.mock(ReadTimelineController.class);
         postMessageController = Mockito.mock(PostMessageController.class);
         wallController = Mockito.mock(WallController.class);
-        consoleRouter = new ConsoleRouter(readTimelineController, postMessageController, wallController);
+        followController = Mockito.mock(FollowController.class);
+        compositeConsoleRouter = new CompositeConsoleRouter(
+                readTimelineController,
+                postMessageController,
+                wallController,
+                followController
+        );
 
         actualSocialNetworker = ArgumentCaptor.forClass(SocialNetworker.class);
         actualMessage = ArgumentCaptor.forClass(String.class);
@@ -33,7 +41,7 @@ public class ConsoleRouterTest {
 
     @Test
     public void routesPostMessageCommands() {
-        consoleRouter.routeCommand("Alice -> Hello!");
+        compositeConsoleRouter.route("Alice -> Hello!");
 
         Mockito.verify(postMessageController).execute(actualSocialNetworker.capture(), actualMessage.capture());
         assertThat(actualSocialNetworker.getValue(), is(alice));
@@ -42,7 +50,7 @@ public class ConsoleRouterTest {
 
     @Test
     public void routesReadTimelineCommands() {
-        consoleRouter.routeCommand("Alice");
+        compositeConsoleRouter.route("Alice");
 
         Mockito.verify(readTimelineController).execute(actualSocialNetworker.capture());
         assertThat(actualSocialNetworker.getValue(), is(alice));
@@ -50,10 +58,21 @@ public class ConsoleRouterTest {
 
     @Test
     public void routesWallCommands() {
-        consoleRouter.routeCommand("Alice wall");
+        compositeConsoleRouter.route("Alice wall");
 
         Mockito.verify(wallController).execute(actualSocialNetworker.capture());
         assertThat(actualSocialNetworker.getValue(), is(alice));
     }
 
+    @Test
+    public void routesFollowCommands() {
+        ArgumentCaptor<SocialNetworker> actualFollower = ArgumentCaptor.forClass(SocialNetworker.class);
+        ArgumentCaptor<SocialNetworker> actualFollowee = ArgumentCaptor.forClass(SocialNetworker.class);
+
+        compositeConsoleRouter.route("Alice follows Bob");
+
+        Mockito.verify(followController).execute(actualFollower.capture(), actualFollowee.capture());
+        assertThat(actualFollower.getValue(), is(alice));
+        assertThat(actualFollowee.getValue(), is(bob));
+    }
 }

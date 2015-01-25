@@ -12,14 +12,14 @@ import java.io.IOException;
 public class TwitterApplication implements Runnable {
     private final BufferedReader in;
     private final ConsoleOutput output;
-    private ConsoleRouter consoleRouter;
+    private CompositeConsoleRouter compositeConsoleRouter;
 
     public TwitterApplication(BufferedReader in, Messages messages, Clock clock, ConsoleOutput output) {
         this.in = in;
         this.output = output;
         TimeElapsedView timeElapsedView = new TimeElapsedView(clock);
 
-        this.consoleRouter = new ConsoleRouter(
+        this.compositeConsoleRouter = new CompositeConsoleRouter(
                 new ReadTimelineController(
                         new ReadTimeline(messages),
                         new ReadTimelineView(
@@ -39,8 +39,8 @@ public class TwitterApplication implements Runnable {
                                 output,
                                 timeElapsedView
                         )
-                )
-        );
+                ),
+                new FollowController());
     }
 
     @Override
@@ -58,7 +58,7 @@ public class TwitterApplication implements Runnable {
                 break;
             }
 
-            consoleRouter.routeCommand(command);
+            compositeConsoleRouter.route(command);
         }
     }
 }
