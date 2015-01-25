@@ -1,6 +1,7 @@
-package pduda.twitter.ui;
+package pduda.twitter.main;
 
 import pduda.twitter.domain.Messages;
+import pduda.twitter.ui.*;
 import pduda.twitter.usecase.ReadTimeline;
 
 import java.io.BufferedReader;

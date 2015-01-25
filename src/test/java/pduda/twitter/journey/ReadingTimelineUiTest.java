@@ -4,9 +4,9 @@ import org.junit.Before;
 import org.junit.Test;
 import pduda.twitter.domain.Message;
 import pduda.twitter.domain.SocialNetworker;
+import pduda.twitter.main.TwitterApplication;
 import pduda.twitter.persistence.InMemoryMessages;
 import pduda.twitter.ui.ConsoleOutput;
-import pduda.twitter.ui.TwitterApplication;
 import pduda.twitter.util.FixedClock;
 
 import java.io.*;

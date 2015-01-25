@@ -3,7 +3,6 @@ package pduda.twitter.main;
 import pduda.twitter.persistence.InMemoryMessages;
 import pduda.twitter.ui.ConsoleOutput;
 import pduda.twitter.ui.RealClock;
-import pduda.twitter.ui.TwitterApplication;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
