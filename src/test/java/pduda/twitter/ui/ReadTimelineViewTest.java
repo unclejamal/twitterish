@@ -36,7 +36,6 @@ public class ReadTimelineViewTest {
     @Test
     public void outputsMessagesForNonEmptyTimelines() {
         Instant publicationDate = somePublicationDate();
-
         Mockito.when(timeElapsedView.since(publicationDate)).thenReturn("3 minutes ago");
 
         view.present(new Timeline(asList(
