@@ -37,6 +37,20 @@ public class TimeElapsedViewTest {
         assertThat(timeElapsed, is("2 seconds ago"));
     }
 
+    @Test
+    public void presentsOneMinuteAgo() {
+        clock.fixAt(someDay().atTime(10, 0).toInstant(UTC));
+        String timeElapsed = timeElapsedView.since(someDay().atTime(9, 59, 0).toInstant(UTC));
+        assertThat(timeElapsed, is("1 minute ago"));
+    }
+
+    @Test
+    public void presentsTwoMinutesAgo() {
+        clock.fixAt(someDay().atTime(10, 0).toInstant(UTC));
+        String timeElapsed = timeElapsedView.since(someDay().atTime(9, 58, 0).toInstant(UTC));
+        assertThat(timeElapsed, is("2 minutes ago"));
+    }
+
     private LocalDate someDay() {
         return Year.of(2015).atMonth(JANUARY).atDay(30);
     }
