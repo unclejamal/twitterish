@@ -1,6 +1,6 @@
 package pduda.twitter.ui;
 
-import pduda.twitter.infrastructure.InMemoryMessages;
+import pduda.twitter.domain.Messages;
 import pduda.twitter.usecase.ReadTimeline;
 
 import java.io.BufferedReader;
@@ -11,7 +11,7 @@ public class TwitterApplication implements Runnable {
     private final ConsoleOutput output;
     private TheController theController;
 
-    public TwitterApplication(BufferedReader in, InMemoryMessages messages, Clock clock, ConsoleOutput output) {
+    public TwitterApplication(BufferedReader in, Messages messages, Clock clock, ConsoleOutput output) {
         this.in = in;
         this.output = output;
         this.theController = new TheController(

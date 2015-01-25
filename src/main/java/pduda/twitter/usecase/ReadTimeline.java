@@ -1,14 +1,14 @@
 package pduda.twitter.usecase;
 
-import pduda.twitter.infrastructure.InMemoryMessages;
+import pduda.twitter.domain.Messages;
 import pduda.twitter.domain.SocialNetworker;
 import pduda.twitter.domain.Timeline;
 
 public class ReadTimeline {
 
-    private InMemoryMessages messages;
+    private Messages messages;
 
-    public ReadTimeline(InMemoryMessages messages) {
+    public ReadTimeline(Messages messages) {
         this.messages = messages;
     }
 
