@@ -4,7 +4,16 @@ import pduda.twitter.domain.Messages;
 import pduda.twitter.domain.usecase.PostMessage;
 import pduda.twitter.domain.usecase.ReadTimeline;
 import pduda.twitter.domain.usecase.Wall;
-import pduda.twitter.ui.*;
+import pduda.twitter.ui.Clock;
+import pduda.twitter.ui.CompositeConsoleRouter;
+import pduda.twitter.ui.ConsoleOutput;
+import pduda.twitter.ui.TimeElapsedView;
+import pduda.twitter.ui.follow.FollowController;
+import pduda.twitter.ui.postmessage.PostMessageController;
+import pduda.twitter.ui.readtimeline.ReadTimelineController;
+import pduda.twitter.ui.readtimeline.ReadTimelineView;
+import pduda.twitter.ui.wall.WallController;
+import pduda.twitter.ui.wall.WallView;
 
 import java.io.BufferedReader;
 import java.io.IOException;

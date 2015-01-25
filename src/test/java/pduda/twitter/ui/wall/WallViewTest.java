@@ -1,4 +1,4 @@
-package pduda.twitter.ui;
+package pduda.twitter.ui.wall;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -6,6 +6,8 @@ import org.mockito.Mockito;
 import pduda.twitter.domain.Message;
 import pduda.twitter.domain.SocialNetworker;
 import pduda.twitter.domain.Timeline;
+import pduda.twitter.ui.ConsoleOutput;
+import pduda.twitter.ui.TimeElapsedView;
 
 import java.time.Instant;
 
@@ -13,10 +15,10 @@ import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
 import static pduda.twitter.util.ObjectMother.somePublicationDate;
 
-public class ReadTimelineViewTest {
+public class WallViewTest {
 
     private ConsoleOutput output;
-    private ReadTimelineView view;
+    private WallView view;
     private TimeElapsedView timeElapsedView;
 
     @Before
@@ -24,7 +26,7 @@ public class ReadTimelineViewTest {
         output = Mockito.mock(ConsoleOutput.class);
         timeElapsedView = Mockito.mock(TimeElapsedView.class);
 
-        view = new ReadTimelineView(output, timeElapsedView);
+        view = new WallView(output, timeElapsedView);
     }
 
     @Test
@@ -39,8 +41,9 @@ public class ReadTimelineViewTest {
         Mockito.when(timeElapsedView.since(publicationDate)).thenReturn("3 minutes ago");
 
         view.present(new Timeline(asList(
-                new Message(new SocialNetworker("bob"), "content", publicationDate))));
+                new Message(new SocialNetworker("Bob"), "content", publicationDate))));
 
-        Mockito.verify(output).writeLineAndFlush("content (3 minutes ago)");
+        Mockito.verify(output).writeLineAndFlush("Bob - content (3 minutes ago)");
     }
+
 }

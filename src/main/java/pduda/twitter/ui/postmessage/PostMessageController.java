@@ -1,4 +1,4 @@
-package pduda.twitter.ui;
+package pduda.twitter.ui.postmessage;
 
 import pduda.twitter.domain.SocialNetworker;
 import pduda.twitter.domain.usecase.PostMessage;

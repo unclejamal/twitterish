@@ -1,6 +1,8 @@
-package pduda.twitter.ui;
+package pduda.twitter.ui.wall;
 
 import pduda.twitter.domain.Timeline;
+import pduda.twitter.ui.ConsoleOutput;
+import pduda.twitter.ui.TimeElapsedView;
 
 public class WallView {
     private final ConsoleOutput output;

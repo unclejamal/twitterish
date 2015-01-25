@@ -1,6 +1,7 @@
-package pduda.twitter.ui;
+package pduda.twitter.ui.readtimeline;
 
 import pduda.twitter.domain.SocialNetworker;
+import pduda.twitter.ui.ConsoleRouter;
 
 public class ReadTimelineConsoleRouter implements ConsoleRouter {
 

@@ -1,6 +1,7 @@
-package pduda.twitter.ui;
+package pduda.twitter.ui.follow;
 
 import pduda.twitter.domain.SocialNetworker;
+import pduda.twitter.ui.ConsoleRouter;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

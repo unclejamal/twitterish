@@ -5,6 +5,10 @@ import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 import pduda.twitter.domain.SocialNetworker;
+import pduda.twitter.ui.follow.FollowController;
+import pduda.twitter.ui.postmessage.PostMessageController;
+import pduda.twitter.ui.readtimeline.ReadTimelineController;
+import pduda.twitter.ui.wall.WallController;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;

@@ -1,4 +1,4 @@
-package pduda.twitter.ui;
+package pduda.twitter.ui.follow;
 
 import pduda.twitter.domain.SocialNetworker;
 
