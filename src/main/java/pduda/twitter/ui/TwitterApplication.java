@@ -9,7 +9,7 @@ import java.io.IOException;
 public class TwitterApplication implements Runnable {
     private final BufferedReader in;
     private final ConsoleOutput output;
-    private TheController theController;
+    private final TheController theController;
 
     public TwitterApplication(BufferedReader in, Messages messages, Clock clock, ConsoleOutput output) {
         this.in = in;
