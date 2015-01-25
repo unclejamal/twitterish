@@ -1,4 +1,4 @@
-package pduda.twitter.infrastructure;
+package pduda.twitter.persistence;
 
 import org.junit.Before;
 import org.junit.Test;

@@ -1,6 +1,6 @@
 package pduda.twitter.main;
 
-import pduda.twitter.infrastructure.InMemoryMessages;
+import pduda.twitter.persistence.InMemoryMessages;
 import pduda.twitter.ui.ConsoleOutput;
 import pduda.twitter.ui.RealClock;
 import pduda.twitter.ui.TwitterApplication;

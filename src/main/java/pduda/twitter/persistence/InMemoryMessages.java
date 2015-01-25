@@ -1,4 +1,4 @@
-package pduda.twitter.infrastructure;
+package pduda.twitter.persistence;
 
 import pduda.twitter.domain.Message;
 import pduda.twitter.domain.Messages;

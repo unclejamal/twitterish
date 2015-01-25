@@ -8,7 +8,7 @@ import org.junit.Test;
 import pduda.twitter.domain.Message;
 import pduda.twitter.domain.SocialNetworker;
 import pduda.twitter.domain.Timeline;
-import pduda.twitter.infrastructure.InMemoryMessages;
+import pduda.twitter.persistence.InMemoryMessages;
 import pduda.twitter.usecase.ReadTimeline;
 
 import java.time.Year;
