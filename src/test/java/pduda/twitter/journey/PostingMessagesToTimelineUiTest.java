@@ -9,6 +9,7 @@ import pduda.twitter.ui.ConsoleOutput;
 import pduda.twitter.util.FixedClock;
 
 import java.io.*;
+import java.time.LocalDateTime;
 
 import static java.lang.System.lineSeparator;
 import static java.time.ZoneOffset.UTC;
@@ -41,18 +42,14 @@ public class PostingMessagesToTimelineUiTest {
     }
 
     @Test(timeout = 1000)
-    public void postMessagesToTheTimeline() throws IOException {
-        clock.fixAt(someDay().atTime(9, 55).toInstant(UTC));
-        enter("Alice -> I love the weather today");
+    public void postMessagesToTheTimeline() throws Exception {
+        enter("Alice -> I love the weather today", whenTimeIs(someDay().atTime(9, 55)));
 
-        clock.fixAt(someDay().atTime(9, 58).toInstant(UTC));
-        enter("Bob -> Damn! We lost!");
+        enter("Bob -> Damn! We lost!", whenTimeIs(someDay().atTime(9, 58)));
 
-        clock.fixAt(someDay().atTime(9, 59).toInstant(UTC));
-        enter("Bob -> Good game though.");
+        enter("Bob -> Good game though.", whenTimeIs(someDay().atTime(9, 59)));
 
-        clock.fixAt(someDay().atTime(10, 0).toInstant(UTC));
-        enter("Alice");
+        enter("Alice", whenTimeIs(someDay().atTime(10, 0)));
         assertOutputLines(
                 "I love the weather today (5 minutes ago)"
         );
@@ -66,9 +63,18 @@ public class PostingMessagesToTimelineUiTest {
         enter("quit");
     }
 
-    private void enter(String command) throws IOException {
+    private Runnable whenTimeIs(LocalDateTime localDateTime) {
+        return () -> clock.fixAt(localDateTime.toInstant(UTC));
+    }
+
+    private void enter(String command, Runnable context) throws IOException {
         read(PROMPT);
+        context.run();
         write(command);
+    }
+
+    private void enter(String command) throws IOException {
+        enter(command, () -> {});
     }
 
     private void read(String expectedOutput) throws IOException {

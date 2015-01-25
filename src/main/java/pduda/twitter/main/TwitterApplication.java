@@ -1,8 +1,9 @@
 package pduda.twitter.main;
 
 import pduda.twitter.domain.Messages;
+import pduda.twitter.domain.usecase.PostMessage;
+import pduda.twitter.domain.usecase.ReadTimeline;
 import pduda.twitter.ui.*;
-import pduda.twitter.usecase.ReadTimeline;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -23,7 +24,9 @@ public class TwitterApplication implements Runnable {
                                 new TimeElapsedView(clock)
                         )
                 ),
-                new PostMessageController());
+                new PostMessageController(
+                        new PostMessage(messages, clock)
+                ));
     }
 
     @Override

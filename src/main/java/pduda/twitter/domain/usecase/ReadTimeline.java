@@ -1,4 +1,4 @@
-package pduda.twitter.usecase;
+package pduda.twitter.domain.usecase;
 
 import pduda.twitter.domain.Messages;
 import pduda.twitter.domain.SocialNetworker;

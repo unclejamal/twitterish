@@ -6,10 +6,11 @@ import org.hamcrest.TypeSafeMatcher;
 import org.junit.Before;
 import org.junit.Test;
 import pduda.twitter.domain.Message;
+import pduda.twitter.domain.Messages;
 import pduda.twitter.domain.SocialNetworker;
 import pduda.twitter.domain.Timeline;
+import pduda.twitter.domain.usecase.ReadTimeline;
 import pduda.twitter.persistence.InMemoryMessages;
-import pduda.twitter.usecase.ReadTimeline;
 
 import java.util.Arrays;
 import java.util.List;
@@ -21,7 +22,7 @@ import static pduda.twitter.util.ObjectMother.someDay;
 public class ReadingTimelineTest {
 
     private ReadTimeline readTimeline;
-    private InMemoryMessages messages;
+    private Messages messages;
     private SocialNetworker bob;
     private SocialNetworker alice;
 

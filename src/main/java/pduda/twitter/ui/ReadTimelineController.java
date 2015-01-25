@@ -2,7 +2,7 @@ package pduda.twitter.ui;
 
 import pduda.twitter.domain.SocialNetworker;
 import pduda.twitter.domain.Timeline;
-import pduda.twitter.usecase.ReadTimeline;
+import pduda.twitter.domain.usecase.ReadTimeline;
 
 public class ReadTimelineController {
 

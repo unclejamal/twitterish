@@ -12,7 +12,8 @@ public class TimeElapsedView {
     }
 
     public String since(Instant date) {
-        Duration duration = Duration.between(date, clock.instant());
+        Instant instant = clock.instant();
+        Duration duration = Duration.between(date, instant);
         long elapsedSeconds = duration.get(ChronoUnit.SECONDS);
 
         if (elapsedSeconds >= 60) {
