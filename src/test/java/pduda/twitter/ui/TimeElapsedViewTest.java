@@ -44,6 +44,12 @@ public class TimeElapsedViewTest {
         assertThat(timeElapsedBetween(someDay().atTime(10, 0), someDay().atTime(9, 58, 0)), is("2 minutes ago"));
     }
 
+    @Test
+    public void presentsOneMinuteAgoForEverythingBetweenOneAndAlmostTwoMinutes() {
+        assertThat(timeElapsedBetween(someDay().atTime(10, 0), someDay().atTime(9, 58, 30)), is("1 minute ago"));
+    }
+
+
     private String timeElapsedBetween(LocalDateTime newerInstant, LocalDateTime olderInstant) {
         clock.fixAt(newerInstant.toInstant(UTC));
         return timeElapsedView.since(olderInstant.toInstant(UTC));
