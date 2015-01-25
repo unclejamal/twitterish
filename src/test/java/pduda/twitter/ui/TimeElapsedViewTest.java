@@ -2,6 +2,7 @@ package pduda.twitter.ui;
 
 import org.junit.Before;
 import org.junit.Test;
+import pduda.twitter.util.FixedClock;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

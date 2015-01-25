@@ -1,4 +1,6 @@
-package pduda.twitter.ui;
+package pduda.twitter.util;
+
+import pduda.twitter.ui.Clock;
 
 import java.time.Instant;
 

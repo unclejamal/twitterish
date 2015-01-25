@@ -5,8 +5,10 @@ import org.junit.Test;
 import pduda.twitter.domain.Message;
 import pduda.twitter.domain.SocialNetworker;
 import pduda.twitter.infrastructure.InMemoryMessages;
+import pduda.twitter.util.FixedClock;
 
 import java.io.*;
+import java.time.Instant;
 import java.time.Year;
 
 import static java.lang.System.lineSeparator;
@@ -42,7 +44,7 @@ public class ReadingTimelineUiTest {
         clock.fixAt(Year.of(2015).atMonth(JANUARY).atDay(30).atTime(10, 0).toInstant(UTC));
 
         messages.addMessage(new Message(new SocialNetworker("Alice"), "I love the weather today",
-                Year.of(2015).atMonth(JANUARY).atDay(30).atTime(9, 55).toInstant(UTC)));
+                someDate()));
         messages.addMessage(new Message(new SocialNetworker("Bob"), "Damn! We lost!",
                 Year.of(2015).atMonth(JANUARY).atDay(30).atTime(9, 58).toInstant(UTC)));
         messages.addMessage(new Message(new SocialNetworker("Bob"), "Good game though.",
@@ -60,6 +62,10 @@ public class ReadingTimelineUiTest {
         );
 
         enter("quit");
+    }
+
+    public static Instant someDate() {
+        return Year.of(2015).atMonth(JANUARY).atDay(30).atTime(9, 55).toInstant(UTC);
     }
 
     private void enter(String command) throws IOException {

@@ -11,6 +11,7 @@ import java.time.Instant;
 
 import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
+import static pduda.twitter.util.ObjectMother.somePublicationDate;
 
 public class ReadTimelineViewTest {
 
@@ -43,9 +44,4 @@ public class ReadTimelineViewTest {
 
         Mockito.verify(output).writeLineAndFlush("content (3 minutes ago)");
     }
-
-    private Instant somePublicationDate() {
-        return Instant.now();
-    }
-
 }

@@ -5,13 +5,13 @@ import org.junit.Test;
 import pduda.twitter.domain.Message;
 import pduda.twitter.domain.SocialNetworker;
 
-import java.time.Instant;
 import java.util.Arrays;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
+import static pduda.twitter.util.ObjectMother.somePublicationDate;
 
 public class InMemoryMessagesTest {
 
@@ -32,8 +32,8 @@ public class InMemoryMessagesTest {
     }
     @Test
     public void getsMessagesForSocialNetworkerThatHasAlreadyPosted() {
-        Message bobsMessage1 = new Message(bob, "content 1", Instant.now());
-        Message bobsMessage2 = new Message(bob, "content 2", Instant.now());
+        Message bobsMessage1 = new Message(bob, "content 1", somePublicationDate());
+        Message bobsMessage2 = new Message(bob, "content 2", somePublicationDate());
         messages.addMessage(bobsMessage1);
         messages.addMessage(bobsMessage2);
 
@@ -41,4 +41,5 @@ public class InMemoryMessagesTest {
 
         assertThat(messagesForBob, equalTo(Arrays.asList(bobsMessage1, bobsMessage2)));
     }
+
 }
