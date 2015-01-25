@@ -12,6 +12,7 @@ import pduda.twitter.persistence.InMemoryMessages;
 import pduda.twitter.usecase.ReadTimeline;
 
 import java.util.Arrays;
+import java.util.List;
 
 import static java.time.ZoneOffset.UTC;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -52,20 +53,23 @@ public class ReadingTimelineTest {
     }
 
     private Matcher<? super Timeline> hasMessages(final Message... messages) {
+        List<Message> expectedMessages = Arrays.asList(messages);
         return new TypeSafeMatcher<Timeline>() {
             @Override
             protected boolean matchesSafely(Timeline timeline) {
-                return timeline.containsAll(Arrays.asList(messages));
+                return timeline.containsAll(expectedMessages);
             }
 
             @Override
             public void describeTo(Description description) {
                 description.appendText("the timeline to have messages: ");
-                for (Message message : messages) {
-                    description.appendValue(message);
-                    description.appendText(", ");
+                expectedMessages.stream()
+                        .forEach(expectedMessage -> {
+                            description.appendValue(expectedMessage);
+                            description.appendText(", ");
+                        });
+
                 }
-            }
         };
     }
 
