@@ -5,8 +5,8 @@ import org.junit.Test;
 import pduda.twitter.domain.Message;
 import pduda.twitter.domain.SocialNetworker;
 
+import java.time.Instant;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -32,8 +32,8 @@ public class InMemoryMessagesTest {
     }
     @Test
     public void getsMessagesForSocialNetworkerThatHasAlreadyPosted() {
-        Message bobsMessage1 = new Message(bob, "content 1", new Date(1));
-        Message bobsMessage2 = new Message(bob, "content 2", new Date(2));
+        Message bobsMessage1 = new Message(bob, "content 1", Instant.now());
+        Message bobsMessage2 = new Message(bob, "content 2", Instant.now());
         messages.addMessage(bobsMessage1);
         messages.addMessage(bobsMessage2);
 

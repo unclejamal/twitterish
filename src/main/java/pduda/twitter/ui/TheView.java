@@ -2,6 +2,8 @@ package pduda.twitter.ui;
 
 import pduda.twitter.domain.Timeline;
 
+import java.time.Instant;
+
 public class TheView {
     private ConsoleOutput output;
 
@@ -11,7 +13,13 @@ public class TheView {
 
     public void present(Timeline timeline) {
         timeline.forEachMessage(message -> {
-            output.writeLineAndFlush(String.format("%s (%s ago)", message.getContent(), "5 minutes"));
+            output.writeLineAndFlush(String.format("%s (%s ago)", message.getContent(), new TimeElapsedView().since(message.getPublicationDate())));
         });
+    }
+
+    public static class TimeElapsedView {
+        public String since(Instant date) {
+            return "5 minutes";
+        }
     }
 }

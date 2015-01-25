@@ -8,7 +8,6 @@ import pduda.twitter.infrastructure.InMemoryMessages;
 
 import java.io.*;
 import java.time.Year;
-import java.util.Date;
 
 import static java.lang.System.lineSeparator;
 import static java.time.Month.JANUARY;
@@ -43,11 +42,11 @@ public class ReadingTimelineUiTest {
         clock.fixAt(Year.of(2015).atMonth(JANUARY).atDay(30).atTime(10, 0).toInstant(UTC));
 
         messages.addMessage(new Message(new SocialNetworker("Alice"), "I love the weather today",
-                Date.from(Year.of(2015).atMonth(JANUARY).atDay(30).atTime(9, 55).toInstant(UTC))));
+                Year.of(2015).atMonth(JANUARY).atDay(30).atTime(9, 55).toInstant(UTC)));
         messages.addMessage(new Message(new SocialNetworker("Bob"), "Damn! We lost!",
-                Date.from(Year.of(2015).atMonth(JANUARY).atDay(30).atTime(9, 58).toInstant(UTC))));
+                Year.of(2015).atMonth(JANUARY).atDay(30).atTime(9, 58).toInstant(UTC)));
         messages.addMessage(new Message(new SocialNetworker("Bob"), "Good game though.",
-                Date.from(Year.of(2015).atMonth(JANUARY).atDay(30).atTime(9, 59).toInstant(UTC))));
+                Year.of(2015).atMonth(JANUARY).atDay(30).atTime(9, 59).toInstant(UTC)));
 
         enter("Alice");
         assertOutputLines(

@@ -3,10 +3,10 @@ package pduda.twitter.domain;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Date;
+import java.time.Instant;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 public class MessageTest {
 
@@ -18,7 +18,7 @@ public class MessageTest {
     public void setUp() throws Exception {
         networker = new SocialNetworker("alice");
         bob = new SocialNetworker("bob");
-        messagePostedByBob = new Message(bob, "content", new Date(1));
+        messagePostedByBob = new Message(bob, "content", Instant.now());
     }
 
     @Test

@@ -1,16 +1,16 @@
 package pduda.twitter.domain;
 
-import java.util.Date;
+import java.time.Instant;
 
 public class Message {
     private final SocialNetworker socialNetworker;
     private final String content;
-    private final Date date;
+    private final Instant date;
 
-    public Message(SocialNetworker socialNetworker, String content, Date date) {
+    public Message(SocialNetworker socialNetworker, String content, Instant publicationDate) {
         this.socialNetworker = socialNetworker;
         this.content = content;
-        this.date = date;
+        this.date = publicationDate;
     }
 
     public boolean hasBeenPostedBy(SocialNetworker socialNetworker) {
@@ -25,7 +25,7 @@ public class Message {
         return content;
     }
 
-    public Date getDate() {
+    public Instant getPublicationDate() {
         return date;
     }
 

@@ -5,13 +5,17 @@ import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 import org.junit.Before;
 import org.junit.Test;
-import pduda.twitter.domain.*;
+import pduda.twitter.domain.Message;
+import pduda.twitter.domain.SocialNetworker;
+import pduda.twitter.domain.Timeline;
 import pduda.twitter.infrastructure.InMemoryMessages;
 import pduda.twitter.usecase.ReadTimeline;
 
+import java.time.Year;
 import java.util.Arrays;
-import java.util.Date;
 
+import static java.time.Month.JANUARY;
+import static java.time.ZoneOffset.UTC;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ReadingTimelineTest {
@@ -36,11 +40,19 @@ public class ReadingTimelineTest {
 
     @Test
     public void showsTimelineWithMessagesPreviouslyAddedByASocialNetworker() {
-        messages.addMessage(new Message(alice, "I love the weather today", new Date(1)));
-        messages.addMessage(new Message(bob, "Damn! We lost!", new Date(2)));
-        messages.addMessage(new Message(bob, "Good game though.", new Date(3)));
+        messages.addMessage(new Message(alice, "I love the weather today",
+                Year.of(2015).atMonth(JANUARY).atDay(30).atTime(9, 55).toInstant(UTC)));
+        messages.addMessage(new Message(bob, "Damn! We lost!",
+                Year.of(2015).atMonth(JANUARY).atDay(30).atTime(9, 58).toInstant(UTC)));
+        messages.addMessage(new Message(bob, "Good game though.",
+                Year.of(2015).atMonth(JANUARY).atDay(30).atTime(9, 59).toInstant(UTC)));
+
         Timeline timeline = readTimeline.execute(bob);
-        assertThat(timeline, hasMessages(new Message(bob, "Damn! We lost!", new Date(2)), new Message(bob, "Good game though.", new Date(3))));
+        assertThat(timeline, hasMessages(
+                new Message(bob, "Damn! We lost!",
+                        Year.of(2015).atMonth(JANUARY).atDay(30).atTime(9, 58).toInstant(UTC)),
+                new Message(bob, "Good game though.",
+                        Year.of(2015).atMonth(JANUARY).atDay(30).atTime(9, 59).toInstant(UTC))));
     }
 
     private Matcher<? super Timeline> hasMessages(final Message... messages) {
