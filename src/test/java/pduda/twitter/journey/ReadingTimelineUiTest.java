@@ -42,7 +42,7 @@ public class ReadingTimelineUiTest {
     }
 
     @Test(timeout = 1000)
-    public void journey() throws IOException {
+    public void readTimeline() throws IOException {
         clock.fixAt(someDay().atTime(10, 0).toInstant(UTC));
 
         messages.addMessage(new Message(alice, "I love the weather today", someDay().atTime(9, 55).toInstant(UTC)));
