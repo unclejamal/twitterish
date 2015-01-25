@@ -1,6 +1,8 @@
 package pduda.twitter.ui;
 
+import java.time.Duration;
 import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 
 public class TimeElapsedView {
     private final Clock clock;
@@ -10,6 +12,13 @@ public class TimeElapsedView {
     }
 
     public String since(Instant date) {
-        return "1 second ago";
+        Duration duration = Duration.between(date, clock.instant());
+        long elapsedSeconds = duration.get(ChronoUnit.SECONDS);
+
+        return String.format("%s %s ago", elapsedSeconds, pluraliseSeconds(elapsedSeconds));
+    }
+
+    private String pluraliseSeconds(long elapsedSeconds) {
+        return elapsedSeconds > 1 ? "seconds" : "second";
     }
 }

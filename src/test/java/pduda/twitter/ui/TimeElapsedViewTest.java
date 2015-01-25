@@ -26,8 +26,15 @@ public class TimeElapsedViewTest {
     @Test
     public void presentsOneSecondAgo() {
         clock.fixAt(someDay().atTime(10, 0).toInstant(UTC));
-        String timeElapsed = timeElapsedView.since(someDay().atTime(9, 59).toInstant(UTC));
+        String timeElapsed = timeElapsedView.since(someDay().atTime(9, 59, 59).toInstant(UTC));
         assertThat(timeElapsed, is("1 second ago"));
+    }
+
+    @Test
+    public void presentsTwoSecondsAgo() {
+        clock.fixAt(someDay().atTime(10, 0).toInstant(UTC));
+        String timeElapsed = timeElapsedView.since(someDay().atTime(9, 59, 58).toInstant(UTC));
+        assertThat(timeElapsed, is("2 seconds ago"));
     }
 
     private LocalDate someDay() {
