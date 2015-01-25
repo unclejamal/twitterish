@@ -29,12 +29,20 @@ public class ConsoleRouterTest {
     }
 
     @Test
-    public void routesPostCommands() {
-        consoleRouter.execute("Pawel -> Hello!");
+    public void routesPostMessageCommands() {
+        consoleRouter.routeCommand("Pawel -> Hello!");
 
         Mockito.verify(postMessageController).execute(actualSocialNetworker.capture(), actualMessage.capture());
         assertThat(actualSocialNetworker.getValue(), is(new SocialNetworker("Pawel")));
         assertThat(actualMessage.getValue(), is("Hello!"));
+    }
+
+    @Test
+    public void routesReadTimelineCommands() {
+        consoleRouter.routeCommand("Alice");
+
+        Mockito.verify(readTimelineController).commandEntered(actualSocialNetworker.capture());
+        assertThat(actualSocialNetworker.getValue(), is(new SocialNetworker("Alice")));
     }
 
 }

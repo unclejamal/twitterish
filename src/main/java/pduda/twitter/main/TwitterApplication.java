@@ -10,18 +10,20 @@ import java.io.IOException;
 public class TwitterApplication implements Runnable {
     private final BufferedReader in;
     private final ConsoleOutput output;
-    private final ReadTimelineController readTimelineController;
+    private ConsoleRouter consoleRouter;
 
     public TwitterApplication(BufferedReader in, Messages messages, Clock clock, ConsoleOutput output) {
         this.in = in;
         this.output = output;
-        this.readTimelineController = new ReadTimelineController(
-                new ReadTimeline(messages),
-                new ReadTimelineView(
-                        output,
-                        new TimeElapsedView(clock)
-                )
-        );
+        this.consoleRouter = new ConsoleRouter(
+                new ReadTimelineController(
+                        new ReadTimeline(messages),
+                        new ReadTimelineView(
+                                output,
+                                new TimeElapsedView(clock)
+                        )
+                ),
+                new PostMessageController());
     }
 
     @Override
@@ -38,10 +40,7 @@ public class TwitterApplication implements Runnable {
                 break;
             }
 
-
-            // TODO inject
-            new ConsoleRouter(readTimelineController, null).execute(command);
+            consoleRouter.routeCommand(command);
         }
     }
-
 }
