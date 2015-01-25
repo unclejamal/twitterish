@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.Year;
 
 import static java.time.Month.JANUARY;
@@ -25,30 +26,27 @@ public class TimeElapsedViewTest {
 
     @Test
     public void presentsOneSecondAgo() {
-        clock.fixAt(someDay().atTime(10, 0).toInstant(UTC));
-        String timeElapsed = timeElapsedView.since(someDay().atTime(9, 59, 59).toInstant(UTC));
-        assertThat(timeElapsed, is("1 second ago"));
+        assertThat(timeElapsedBetween(someDay().atTime(10, 0), someDay().atTime(9, 59, 59)), is("1 second ago"));
     }
 
     @Test
     public void presentsTwoSecondsAgo() {
-        clock.fixAt(someDay().atTime(10, 0).toInstant(UTC));
-        String timeElapsed = timeElapsedView.since(someDay().atTime(9, 59, 58).toInstant(UTC));
-        assertThat(timeElapsed, is("2 seconds ago"));
+        assertThat(timeElapsedBetween(someDay().atTime(10, 0), someDay().atTime(9, 59, 58)), is("2 seconds ago"));
     }
 
     @Test
     public void presentsOneMinuteAgo() {
-        clock.fixAt(someDay().atTime(10, 0).toInstant(UTC));
-        String timeElapsed = timeElapsedView.since(someDay().atTime(9, 59, 0).toInstant(UTC));
-        assertThat(timeElapsed, is("1 minute ago"));
+        assertThat(timeElapsedBetween(someDay().atTime(10, 0), someDay().atTime(9, 59, 0)), is("1 minute ago"));
     }
 
     @Test
     public void presentsTwoMinutesAgo() {
-        clock.fixAt(someDay().atTime(10, 0).toInstant(UTC));
-        String timeElapsed = timeElapsedView.since(someDay().atTime(9, 58, 0).toInstant(UTC));
-        assertThat(timeElapsed, is("2 minutes ago"));
+        assertThat(timeElapsedBetween(someDay().atTime(10, 0), someDay().atTime(9, 58, 0)), is("2 minutes ago"));
+    }
+
+    private String timeElapsedBetween(LocalDateTime newerInstant, LocalDateTime olderInstant) {
+        clock.fixAt(newerInstant.toInstant(UTC));
+        return timeElapsedView.since(olderInstant.toInstant(UTC));
     }
 
     private LocalDate someDay() {
