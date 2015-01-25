@@ -17,6 +17,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static pduda.twitter.util.ObjectMother.someDay;
 
+// TODO probably can be removed since PostingMessagesToTimelineUiTest does the job
 public class ReadingTimelineUiTest {
     public static final String PROMPT = "> ";
     public static final SocialNetworker alice = new SocialNetworker("Alice");
