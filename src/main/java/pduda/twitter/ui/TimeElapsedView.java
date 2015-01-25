@@ -16,11 +16,19 @@ public class TimeElapsedView {
         long elapsedSeconds = duration.get(ChronoUnit.SECONDS);
 
         if (elapsedSeconds >= 60) {
-            long elapsedMinutes = duration.toMinutes();
-            return String.format("%s %s ago", elapsedMinutes, pluraliseMinutes(elapsedMinutes));
+            return presentAsMinutes(duration);
         }
 
+        return presentAsSeconds(elapsedSeconds);
+    }
+
+    private String presentAsSeconds(long elapsedSeconds) {
         return String.format("%s %s ago", elapsedSeconds, pluraliseSeconds(elapsedSeconds));
+    }
+
+    private String presentAsMinutes(Duration duration) {
+        long elapsedMinutes = duration.toMinutes();
+        return String.format("%s %s ago", elapsedMinutes, pluraliseMinutes(elapsedMinutes));
     }
 
     private String pluraliseMinutes(long elapsedMinutes) {
