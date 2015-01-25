@@ -1,10 +1,14 @@
 package pduda.twitter.domain;
 
 public class SocialNetworker {
-    private String username;
+    private final String username;
 
     public SocialNetworker(String username) {
         this.username = username;
+    }
+
+    public String getUsername() {
+        return username;
     }
 
     @Override

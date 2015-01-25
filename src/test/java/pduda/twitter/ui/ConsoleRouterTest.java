@@ -11,8 +11,10 @@ import static org.hamcrest.Matchers.is;
 
 public class ConsoleRouterTest {
 
+    private static final SocialNetworker alice = new SocialNetworker("Alice");
     private ReadTimelineController readTimelineController;
     private PostMessageController postMessageController;
+    private WallController wallController;
     private ArgumentCaptor<SocialNetworker> actualSocialNetworker;
     private ArgumentCaptor<String> actualMessage;
 
@@ -22,7 +24,8 @@ public class ConsoleRouterTest {
     public void setUp(){
         readTimelineController = Mockito.mock(ReadTimelineController.class);
         postMessageController = Mockito.mock(PostMessageController.class);
-        consoleRouter = new ConsoleRouter(readTimelineController, postMessageController);
+        wallController = Mockito.mock(WallController.class);
+        consoleRouter = new ConsoleRouter(readTimelineController, postMessageController, wallController);
 
         actualSocialNetworker = ArgumentCaptor.forClass(SocialNetworker.class);
         actualMessage = ArgumentCaptor.forClass(String.class);
@@ -30,10 +33,10 @@ public class ConsoleRouterTest {
 
     @Test
     public void routesPostMessageCommands() {
-        consoleRouter.routeCommand("Pawel -> Hello!");
+        consoleRouter.routeCommand("Alice -> Hello!");
 
         Mockito.verify(postMessageController).execute(actualSocialNetworker.capture(), actualMessage.capture());
-        assertThat(actualSocialNetworker.getValue(), is(new SocialNetworker("Pawel")));
+        assertThat(actualSocialNetworker.getValue(), is(alice));
         assertThat(actualMessage.getValue(), is("Hello!"));
     }
 
@@ -41,8 +44,16 @@ public class ConsoleRouterTest {
     public void routesReadTimelineCommands() {
         consoleRouter.routeCommand("Alice");
 
-        Mockito.verify(readTimelineController).commandEntered(actualSocialNetworker.capture());
-        assertThat(actualSocialNetworker.getValue(), is(new SocialNetworker("Alice")));
+        Mockito.verify(readTimelineController).execute(actualSocialNetworker.capture());
+        assertThat(actualSocialNetworker.getValue(), is(alice));
+    }
+
+    @Test
+    public void routesWallCommands() {
+        consoleRouter.routeCommand("Alice wall");
+
+        Mockito.verify(wallController).execute(actualSocialNetworker.capture());
+        assertThat(actualSocialNetworker.getValue(), is(alice));
     }
 
 }

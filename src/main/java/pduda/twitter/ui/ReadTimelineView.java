@@ -4,7 +4,7 @@ import pduda.twitter.domain.Timeline;
 
 public class ReadTimelineView {
     private final TimeElapsedView timeElapsedView;
-    private ConsoleOutput output;
+    private final ConsoleOutput output;
 
     public ReadTimelineView(ConsoleOutput output, TimeElapsedView timeElapsedView) {
         this.output = output;

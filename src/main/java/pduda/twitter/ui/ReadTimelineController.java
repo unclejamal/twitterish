@@ -14,7 +14,7 @@ public class ReadTimelineController {
         this.readTimelineView = readTimelineView;
     }
 
-    public void commandEntered(SocialNetworker socialNetworker) {
+    public void execute(SocialNetworker socialNetworker) {
         Timeline timeline = readTimeline.execute(socialNetworker);
         readTimelineView.present(timeline);
     }

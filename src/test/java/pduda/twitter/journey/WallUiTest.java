@@ -44,7 +44,7 @@ public class WallUiTest {
 
         enter("Charlie wall", whenTimeIs(someDay().atTime(10, 0)));
         assertOutputLines(
-                "Charlie - I'm in New York today! Anyone want to have a coffee? (2 seconds ago)"
+                "Charlie - I'm in New York today! Anyone want to have a coffee? (15 seconds ago)"
         );
 
         enter("quit");
