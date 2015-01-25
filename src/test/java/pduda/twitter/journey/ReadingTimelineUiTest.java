@@ -10,17 +10,17 @@ import pduda.twitter.ui.TwitterApplication;
 import pduda.twitter.util.FixedClock;
 
 import java.io.*;
-import java.time.Instant;
-import java.time.Year;
 
 import static java.lang.System.lineSeparator;
-import static java.time.Month.JANUARY;
 import static java.time.ZoneOffset.UTC;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
+import static pduda.twitter.util.ObjectMother.someDay;
 
 public class ReadingTimelineUiTest {
     public static final String PROMPT = "> ";
+    public static final SocialNetworker alice = new SocialNetworker("Alice");
+    public static final SocialNetworker bob = new SocialNetworker("Bob");
     private PrintWriter inWriter;
     private BufferedReader outReader;
     private InMemoryMessages messages;
@@ -43,14 +43,11 @@ public class ReadingTimelineUiTest {
 
     @Test(timeout = 1000)
     public void journey() throws IOException {
-        clock.fixAt(Year.of(2015).atMonth(JANUARY).atDay(30).atTime(10, 0).toInstant(UTC));
+        clock.fixAt(someDay().atTime(10, 0).toInstant(UTC));
 
-        messages.addMessage(new Message(new SocialNetworker("Alice"), "I love the weather today",
-                someDate()));
-        messages.addMessage(new Message(new SocialNetworker("Bob"), "Damn! We lost!",
-                Year.of(2015).atMonth(JANUARY).atDay(30).atTime(9, 58).toInstant(UTC)));
-        messages.addMessage(new Message(new SocialNetworker("Bob"), "Good game though.",
-                Year.of(2015).atMonth(JANUARY).atDay(30).atTime(9, 59).toInstant(UTC)));
+        messages.addMessage(new Message(alice, "I love the weather today", someDay().atTime(9, 55).toInstant(UTC)));
+        messages.addMessage(new Message(bob, "Damn! We lost!", someDay().atTime(9, 58).toInstant(UTC)));
+        messages.addMessage(new Message(bob, "Good game though.", someDay().atTime(9, 59).toInstant(UTC)));
 
         enter("Alice");
         assertOutputLines(
@@ -64,10 +61,6 @@ public class ReadingTimelineUiTest {
         );
 
         enter("quit");
-    }
-
-    public static Instant someDate() {
-        return Year.of(2015).atMonth(JANUARY).atDay(30).atTime(9, 55).toInstant(UTC);
     }
 
     private void enter(String command) throws IOException {

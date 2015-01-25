@@ -17,6 +17,7 @@ import java.util.Arrays;
 import static java.time.Month.JANUARY;
 import static java.time.ZoneOffset.UTC;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static pduda.twitter.util.ObjectMother.someDay;
 
 public class ReadingTimelineTest {
 
@@ -40,12 +41,9 @@ public class ReadingTimelineTest {
 
     @Test
     public void showsTimelineWithMessagesPreviouslyAddedByASocialNetworker() {
-        messages.addMessage(new Message(alice, "I love the weather today",
-                Year.of(2015).atMonth(JANUARY).atDay(30).atTime(9, 55).toInstant(UTC)));
-        messages.addMessage(new Message(bob, "Damn! We lost!",
-                Year.of(2015).atMonth(JANUARY).atDay(30).atTime(9, 58).toInstant(UTC)));
-        messages.addMessage(new Message(bob, "Good game though.",
-                Year.of(2015).atMonth(JANUARY).atDay(30).atTime(9, 59).toInstant(UTC)));
+        messages.addMessage(new Message(alice, "I love the weather today", someDay().atTime(9, 55).toInstant(UTC)));
+        messages.addMessage(new Message(bob, "Damn! We lost!", someDay().atTime(9, 58).toInstant(UTC)));
+        messages.addMessage(new Message(bob, "Good game though.", someDay().atTime(9, 59).toInstant(UTC)));
 
         Timeline timeline = readTimeline.execute(bob);
         assertThat(timeline, hasMessages(

@@ -4,14 +4,12 @@ import org.junit.Before;
 import org.junit.Test;
 import pduda.twitter.util.FixedClock;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.Year;
 
-import static java.time.Month.JANUARY;
 import static java.time.ZoneOffset.UTC;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
+import static pduda.twitter.util.ObjectMother.someDay;
 
 public class TimeElapsedViewTest {
 
@@ -55,9 +53,4 @@ public class TimeElapsedViewTest {
         clock.fixAt(newerInstant.toInstant(UTC));
         return timeElapsedView.since(olderInstant.toInstant(UTC));
     }
-
-    private LocalDate someDay() {
-        return Year.of(2015).atMonth(JANUARY).atDay(30);
-    }
-
 }
