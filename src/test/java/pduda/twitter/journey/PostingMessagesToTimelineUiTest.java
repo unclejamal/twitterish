@@ -20,7 +20,6 @@ public class PostingMessagesToTimelineUiTest {
     public static final String PROMPT = "> ";
     private PrintWriter inWriter;
     private BufferedReader outReader;
-    private InMemoryMessages messages;
     private FixedClock clock;
 
     @Before
@@ -33,9 +32,8 @@ public class PostingMessagesToTimelineUiTest {
         BufferedReader in = new BufferedReader(new InputStreamReader(new PipedInputStream(inStream)));
         PrintWriter out = new PrintWriter(new PipedOutputStream(outStream), true);
 
-        messages = new InMemoryMessages();
         clock = new FixedClock();
-        new Thread(new TwitterApplication(in, messages, clock, new ConsoleOutput(out))).start();
+        new Thread(new TwitterApplication(in, new InMemoryMessages(), clock, new ConsoleOutput(out))).start();
     }
 
     @Test(timeout = 1000)
