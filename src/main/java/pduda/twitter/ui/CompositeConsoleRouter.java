@@ -29,6 +29,7 @@ public class CompositeConsoleRouter {
     }
 
     public void route(String command) {
+        // TODO think about it
         routers.stream()
                 .filter(r -> r.canRoute(command))
                 .forEach(r -> r.route(command));
