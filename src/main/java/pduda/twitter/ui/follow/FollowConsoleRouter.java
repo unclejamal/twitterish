@@ -14,7 +14,8 @@ public class FollowConsoleRouter extends RegularExpressionConsoleRouter {
         this.controller = controller;
     }
 
-    public void route(Matcher matcher) {
+    @Override
+    protected void route(Matcher matcher) {
         String follower = matcher.group(1);
         String followee = matcher.group(2);
         controller.execute(new AccountName(follower), new AccountName(followee));

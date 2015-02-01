@@ -13,7 +13,8 @@ public class WallConsoleRouter extends RegularExpressionConsoleRouter {
         this.controller = controller;
     }
 
-    public void route(Matcher matcher) {
+    @Override
+    protected void route(Matcher matcher) {
         String accountName = matcher.group(1);
         controller.execute(new AccountName(accountName));
     }

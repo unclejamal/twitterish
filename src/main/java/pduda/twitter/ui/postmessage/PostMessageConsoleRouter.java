@@ -13,7 +13,8 @@ public class PostMessageConsoleRouter extends RegularExpressionConsoleRouter {
         this.controller = controller;
     }
 
-    public void route(Matcher matcher) {
+    @Override
+    protected void route(Matcher matcher) {
         String accountName = matcher.group(1);
         String message = matcher.group(2);
         controller.execute(new AccountName(accountName), message);
