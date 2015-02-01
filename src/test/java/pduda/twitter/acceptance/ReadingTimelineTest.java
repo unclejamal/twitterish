@@ -36,12 +36,6 @@ public class ReadingTimelineTest {
     }
 
     @Test
-    public void showsEmptyTimelineOfSocialNetworkerWhenNoMessagesHaveBeenPosted() {
-        Timeline timeline = readTimeline.execute(alice);
-        assertThat(timeline, hasNoMessages());
-    }
-
-    @Test
     public void showsTimelineWithMessagesPreviouslyAddedByASocialNetworker() {
         messages.addMessage(new Message(alice, "I love the weather today", someDay().atTime(9, 55).toInstant(UTC)));
         messages.addMessage(new Message(bob, "Damn! We lost!", someDay().atTime(9, 58).toInstant(UTC)));
@@ -70,7 +64,7 @@ public class ReadingTimelineTest {
                             description.appendText(", ");
                         });
 
-                }
+            }
         };
     }
 
