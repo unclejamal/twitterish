@@ -10,6 +10,7 @@ import pduda.twitter.ui.wall.WallConsoleRouter;
 import pduda.twitter.ui.wall.WallController;
 
 import java.util.List;
+import java.util.Optional;
 
 import static java.util.Arrays.asList;
 
@@ -23,16 +24,18 @@ public class CompositeConsoleRouter {
         routers = asList(
                 new PostMessageConsoleRouter(postMessageController),
                 new WallConsoleRouter(wallController),
-                new ReadTimelineConsoleRouter(readTimelineController),
-                new FollowConsoleRouter(followController)
+                new FollowConsoleRouter(followController),
+                new ReadTimelineConsoleRouter(readTimelineController)
         );
     }
 
     public void route(String command) {
         // TODO think about it
-        routers.stream()
+        Optional<ConsoleRouter> router = routers.stream()
                 .filter(r -> r.canRoute(command))
-                .forEach(r -> r.route(command));
+                .findFirst();
+
+        router.ifPresent(r -> r.route(command));
     }
 
 }
