@@ -1,6 +1,5 @@
 package pduda.twitter.main;
 
-import pduda.twitter.persistence.InMemorySocialNetworkers;
 import pduda.twitter.ui.ConsoleInput;
 import pduda.twitter.ui.ConsoleOutput;
 import pduda.twitter.ui.RealClock;
@@ -17,7 +16,6 @@ public class Main {
     public void start() {
         new Thread(
                 new TwitterApplication(
-                        new InMemorySocialNetworkers(),
                         new RealClock(),
                         new ConsoleOutput(new PrintWriter(System.out)),
                         new ConsoleInput(new BufferedReader(new InputStreamReader(System.in)))
