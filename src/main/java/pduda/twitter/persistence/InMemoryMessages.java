@@ -26,16 +26,13 @@ public class InMemoryMessages implements Messages {
 
     @Override
     public SocialNetworker getSocialNetworker(AccountName accountName) {
-//        return new SocialNetworker(getMessagesChronologicallyDescendingFor(accountName));
         return socialNetworkers.get(accountName);
     }
 
     @Override
     public void addMessage(Message message) {
-        messages.add(message);
         if (!socialNetworkers.containsKey(message.getAccountName())) {
-            List<Message> messages1 = new ArrayList<>(asList(message));
-            socialNetworkers.put(message.getAccountName(), new SocialNetworker(messages1));
+            socialNetworkers.put(message.getAccountName(), new SocialNetworker(new ArrayList<>(asList(message))));
         } else {
             socialNetworkers.get(message.getAccountName()).postMessage(message);
         }
