@@ -20,7 +20,7 @@ public class SocialNetworkerTest {
 
     @Before
     public void setUp() {
-        bob = new SocialNetworker(new AccountName("alice"));
+        bob = new SocialNetworker(new AccountName("bob"));
     }
 
     @Test
@@ -36,26 +36,30 @@ public class SocialNetworkerTest {
     @Test
     public void hasAWall() {
         SocialNetworker alice = new SocialNetworker(new AccountName("alice"));
-        Message alicesMessage = new Message(new AccountName("alice"), "content1", somePublicationDate());
-        alice.postMessage(alicesMessage);
-        Message bobsMessage = new Message(new AccountName("bob"), "content2", somePublicationDate());
-        bob.postMessage(bobsMessage);
+        Instant alicesMessageTime = somePublicationDate();
+        alice.postMessageWithContent("alices content", alicesMessageTime);
+        Instant bobsMessageTime = somePublicationDate();
+        bob.postMessageWithContent("bobs content", bobsMessageTime);
 
         bob.follow(alice);
 
-        assertThat(bob.getWall(), is(Timeline.withReverseChronologicalOrder(asList(bobsMessage, alicesMessage))));
+        assertThat(bob.getWall(), is(Timeline.withReverseChronologicalOrder(asList(
+                new Message(new AccountName("bob"), "bobs content", alicesMessageTime),
+                new Message(new AccountName("alice"), "alices content", bobsMessageTime)
+        ))));
     }
 
     @Test
     public void hasPersonalTimelineAfterMessagesPosted() {
         Instant publicationDate = somePublicationDate();
-        Message soonerMessage = new Message(new AccountName("bob"), "content1", publicationDate);
-        Message laterMessage = new Message(new AccountName("bob"), "content2", publicationDate.plusMillis(1000));
 
-        bob.postMessage(soonerMessage);
-        bob.postMessage(laterMessage);
+        bob.postMessageWithContent("content1", publicationDate);
+        bob.postMessageWithContent("content2", publicationDate.plusMillis(1000));
 
-        assertThat(bob.getPersonalTimeline(), is(Timeline.withReverseChronologicalOrder(asList(soonerMessage, laterMessage))));
+        assertThat(bob.getPersonalTimeline(), is(Timeline.withReverseChronologicalOrder(asList(
+                new Message(new AccountName("bob"), "content1", publicationDate),
+                new Message(new AccountName("bob"), "content2", publicationDate.plusMillis(1000))
+        ))));
     }
 
 }

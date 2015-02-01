@@ -4,6 +4,7 @@ import pduda.twitter.domain.AccountName;
 import pduda.twitter.domain.Message;
 import pduda.twitter.domain.Timeline;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -35,8 +36,8 @@ public class SocialNetworker {
                 .reduce(new Timeline(), (t1, t2) -> t1.mergeWith(t2));
     }
 
-    public void postMessage(Message message) {
-        messages.add(message);
+    public void postMessageWithContent(String messageContent, Instant messageTime) {
+        messages.add(new Message(accountName, messageContent, messageTime));
     }
 
     public void follow(SocialNetworker followee) {

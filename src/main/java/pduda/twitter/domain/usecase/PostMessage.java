@@ -1,7 +1,6 @@
 package pduda.twitter.domain.usecase;
 
 import pduda.twitter.domain.AccountName;
-import pduda.twitter.domain.Message;
 import pduda.twitter.domain.SocialNetworkers;
 import pduda.twitter.ui.Clock;
 
@@ -14,7 +13,7 @@ public class PostMessage {
         this.clock = clock;
     }
 
-    public void execute(AccountName accountName, String message) {
-        this.socialNetworkers.getOrCreateSocialNetworker(accountName).postMessage(new Message(accountName, message, clock.instant()));
+    public void execute(AccountName accountName, String content) {
+        this.socialNetworkers.getOrCreateSocialNetworker(accountName).postMessageWithContent(content, clock.instant());
     }
 }

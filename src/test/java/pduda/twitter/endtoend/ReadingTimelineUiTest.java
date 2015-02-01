@@ -3,7 +3,6 @@ package pduda.twitter.endtoend;
 import org.junit.Before;
 import org.junit.Test;
 import pduda.twitter.domain.AccountName;
-import pduda.twitter.domain.Message;
 import pduda.twitter.main.TwitterApplication;
 import pduda.twitter.persistence.InMemorySocialNetworkers;
 import pduda.twitter.ui.ConsoleOutput;
@@ -46,9 +45,9 @@ public class ReadingTimelineUiTest {
     public void readTimeline() throws IOException {
         clock.fixAt(someDay().atTime(10, 0).toInstant(UTC));
 
-        messages.getOrCreateSocialNetworker(alice).postMessage(new Message(alice, "I love the weather today", someDay().atTime(9, 55).toInstant(UTC)));
-        messages.getOrCreateSocialNetworker(bob).postMessage(new Message(bob, "Damn! We lost!", someDay().atTime(9, 58).toInstant(UTC)));
-        messages.getOrCreateSocialNetworker(bob).postMessage(new Message(bob, "Good game though.", someDay().atTime(9, 59).toInstant(UTC)));
+        messages.getOrCreateSocialNetworker(alice).postMessageWithContent("I love the weather today", someDay().atTime(9, 55).toInstant(UTC));
+        messages.getOrCreateSocialNetworker(bob).postMessageWithContent("Damn! We lost!", someDay().atTime(9, 58).toInstant(UTC));
+        messages.getOrCreateSocialNetworker(bob).postMessageWithContent("Good game though.", someDay().atTime(9, 59).toInstant(UTC));
 
         enter("Alice");
         assertOutputLines(
