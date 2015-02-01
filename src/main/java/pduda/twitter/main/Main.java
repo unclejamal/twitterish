@@ -13,6 +13,14 @@ public class Main {
     public static void main(String[] args) throws Exception {
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
         PrintWriter out = new PrintWriter(System.out);
-        new Thread(new TwitterApplication(new InMemorySocialNetworkers(), new RealClock(), new ConsoleOutput(out), new ConsoleInput(in))).start();
+
+        new Thread(
+                new TwitterApplication(
+                        new InMemorySocialNetworkers(),
+                        new RealClock(),
+                        new ConsoleOutput(out),
+                        new ConsoleInput(in)
+                )
+        ).start();
     }
 }
