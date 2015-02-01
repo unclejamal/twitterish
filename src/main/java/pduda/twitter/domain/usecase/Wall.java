@@ -12,6 +12,6 @@ public class Wall {
     }
 
     public Timeline execute(AccountName accountName) {
-        return new Timeline(messages.getMessagesChronologicallyDescendingFor(accountName));
+        return messages.getSocialNetworker(accountName).getPersonalTimeline();
     }
 }
