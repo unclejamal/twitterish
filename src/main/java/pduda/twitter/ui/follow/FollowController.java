@@ -4,8 +4,13 @@ import pduda.twitter.domain.AccountName;
 import pduda.twitter.domain.usecase.FollowSocialNetworker;
 
 public class FollowController {
+    private final FollowSocialNetworker followSocialNetworker;
+
+    public FollowController(FollowSocialNetworker followSocialNetworker) {
+        this.followSocialNetworker = followSocialNetworker;
+    }
+
     public void execute(AccountName follower, AccountName followee) {
-        FollowSocialNetworker followSocialNetworker = new FollowSocialNetworker();
         followSocialNetworker.execute(follower, followee);
     }
 }

@@ -1,6 +1,7 @@
 package pduda.twitter.main;
 
 import pduda.twitter.domain.SocialNetworkers;
+import pduda.twitter.domain.usecase.FollowSocialNetworker;
 import pduda.twitter.domain.usecase.PostMessage;
 import pduda.twitter.domain.usecase.ReadTimeline;
 import pduda.twitter.domain.usecase.Wall;
@@ -49,7 +50,7 @@ public class TwitterApplication implements Runnable {
                                 timeElapsedView
                         )
                 ),
-                new FollowController());
+                new FollowController(new FollowSocialNetworker(socialNetworkers)));
     }
 
     @Override
