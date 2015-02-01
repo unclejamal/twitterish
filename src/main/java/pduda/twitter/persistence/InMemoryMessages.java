@@ -3,6 +3,7 @@ package pduda.twitter.persistence;
 import pduda.twitter.domain.AccountName;
 import pduda.twitter.domain.Message;
 import pduda.twitter.domain.Messages;
+import pduda.twitter.domain.usecase.SocialNetworker;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +17,11 @@ public class InMemoryMessages implements Messages {
 
     public InMemoryMessages() {
         messages = new ArrayList<>();
+    }
+
+    @Override
+    public SocialNetworker getSocialNetworker(AccountName accountName) {
+        return new SocialNetworker(getMessagesChronologicallyDescendingFor(accountName));
     }
 
     public void addMessage(Message message) {
