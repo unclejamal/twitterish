@@ -3,6 +3,7 @@ package pduda.twitter.endtoend;
 import org.junit.Before;
 import pduda.twitter.main.TwitterApplication;
 import pduda.twitter.persistence.InMemorySocialNetworkers;
+import pduda.twitter.ui.ConsoleInput;
 import pduda.twitter.ui.ConsoleOutput;
 import pduda.twitter.util.FixedClock;
 
@@ -30,7 +31,14 @@ public abstract class EndToEndTest {
         PrintWriter out = new PrintWriter(new PipedOutputStream(outStream), true);
 
         clock = new FixedClock();
-        new Thread(new TwitterApplication(in, new InMemorySocialNetworkers(), clock, new ConsoleOutput(out))).start();
+        new Thread(
+                new TwitterApplication(
+                        new InMemorySocialNetworkers(),
+                        clock,
+                        new ConsoleOutput(out),
+                        new ConsoleInput(in)
+                )
+        ).start();
     }
 
     protected Runnable whenTimeIs(LocalDateTime localDateTime) {
