@@ -16,16 +16,16 @@ public class InMemorySocialNetworkers implements SocialNetworkers {
     }
 
     @Override
-    public SocialNetworker getSocialNetworker(AccountName accountName) {
-        return socialNetworkers.get(accountName);
+    public SocialNetworker getOrCreateSocialNetworker(AccountName accountName) {
+        if (!socialNetworkers.containsKey(accountName)) {
+            socialNetworkers.put(accountName, new SocialNetworker(accountName));
+        }
+
+        return getSocialNetworker(accountName);
     }
 
     @Override
-    public SocialNetworker getOrCreateSocialNetworker(AccountName accountName) {
-        if (!socialNetworkers.containsKey(accountName)) {
-            socialNetworkers.put(accountName, new SocialNetworker());
-        }
-
+    public SocialNetworker getSocialNetworker(AccountName accountName) {
         return socialNetworkers.get(accountName);
     }
 }

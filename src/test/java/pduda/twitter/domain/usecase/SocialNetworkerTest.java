@@ -20,7 +20,7 @@ public class SocialNetworkerTest {
 
     @Before
     public void setUp() {
-        bob = new SocialNetworker();
+        bob = new SocialNetworker(new AccountName("alice"));
     }
 
     @Test
@@ -35,7 +35,7 @@ public class SocialNetworkerTest {
 
     @Test
     public void hasAWall() {
-        SocialNetworker alice = new SocialNetworker();
+        SocialNetworker alice = new SocialNetworker(new AccountName("alice"));
         Message alicesMessage = new Message(new AccountName("alice"), "content1", somePublicationDate());
         alice.postMessage(alicesMessage);
         Message bobsMessage = new Message(new AccountName("bob"), "content2", somePublicationDate());

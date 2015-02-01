@@ -1,5 +1,6 @@
 package pduda.twitter.domain.usecase;
 
+import pduda.twitter.domain.AccountName;
 import pduda.twitter.domain.Message;
 import pduda.twitter.domain.Timeline;
 
@@ -10,10 +11,12 @@ import java.util.Set;
 
 public class SocialNetworker {
 
+    private final AccountName accountName;
     private final List<Message> messages;
     private final Set<SocialNetworker> followes;
 
-    public SocialNetworker() {
+    public SocialNetworker(AccountName accountName) {
+        this.accountName = accountName;
         this.messages = new ArrayList<>();
         this.followes = new HashSet<>();
     }
@@ -38,5 +41,36 @@ public class SocialNetworker {
 
     public void follow(SocialNetworker followee) {
         followes.add(followee);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        SocialNetworker that = (SocialNetworker) o;
+
+        if (accountName != null ? !accountName.equals(that.accountName) : that.accountName != null) return false;
+        if (followes != null ? !followes.equals(that.followes) : that.followes != null) return false;
+        if (messages != null ? !messages.equals(that.messages) : that.messages != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = accountName != null ? accountName.hashCode() : 0;
+        result = 31 * result + (messages != null ? messages.hashCode() : 0);
+        result = 31 * result + (followes != null ? followes.hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "SocialNetworker{" +
+                "accountName=" + accountName +
+                ", messages=" + messages +
+                ", followes=" + followes +
+                '}';
     }
 }
