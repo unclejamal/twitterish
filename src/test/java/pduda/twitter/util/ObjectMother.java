@@ -1,5 +1,7 @@
 package pduda.twitter.util;
 
+import pduda.twitter.domain.AccountName;
+
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.Year;
@@ -13,5 +15,9 @@ public class ObjectMother {
 
     public static LocalDate someDay() {
         return Year.of(2015).atMonth(JANUARY).atDay(30);
+    }
+
+    public static AccountName someAccountName() {
+        return new AccountName("bob");
     }
 }

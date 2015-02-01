@@ -7,6 +7,7 @@ import pduda.twitter.domain.usecase.SocialNetworker;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
+import static pduda.twitter.util.ObjectMother.someAccountName;
 
 public class InMemorySocialNetworkersTest {
 
@@ -15,7 +16,7 @@ public class InMemorySocialNetworkersTest {
 
     @Before
     public void setUp() throws Exception {
-        newAccountName = new AccountName("bob");
+        newAccountName = someAccountName();
         inMemorySocialNetworkers = new InMemorySocialNetworkers();
     }
 
