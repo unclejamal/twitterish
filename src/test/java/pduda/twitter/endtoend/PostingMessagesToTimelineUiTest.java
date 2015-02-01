@@ -1,4 +1,4 @@
-package pduda.twitter.journey;
+package pduda.twitter.endtoend;
 
 import org.junit.Before;
 import org.junit.Test;
