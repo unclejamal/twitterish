@@ -1,8 +1,8 @@
 package pduda.twitter.persistence;
 
 import pduda.twitter.domain.AccountName;
+import pduda.twitter.domain.SocialNetworker;
 import pduda.twitter.domain.SocialNetworkers;
-import pduda.twitter.domain.usecase.SocialNetworker;
 
 import java.util.HashMap;
 import java.util.Map;

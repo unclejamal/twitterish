@@ -3,7 +3,7 @@ package pduda.twitter.persistence;
 import org.junit.Before;
 import org.junit.Test;
 import pduda.twitter.domain.AccountName;
-import pduda.twitter.domain.usecase.SocialNetworker;
+import pduda.twitter.domain.SocialNetworker;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;

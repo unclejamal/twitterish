@@ -1,6 +1,7 @@
 package pduda.twitter.domain.usecase;
 
 import pduda.twitter.domain.AccountName;
+import pduda.twitter.domain.SocialNetworker;
 import pduda.twitter.domain.SocialNetworkers;
 
 public class FollowSocialNetworker {

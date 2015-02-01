@@ -23,15 +23,14 @@ public class Timeline {
     }
 
     public Timeline() {
-        this.messages = new ArrayList<>();
+        this(new ArrayList<>());
     }
 
-    public boolean hasMessages() {
-        return false;
-    }
-
-    public boolean containsAll(List<Message> queriedMessages) {
-        return this.messages.equals(queriedMessages);
+    public Timeline mergeWith(Timeline other) {
+        ArrayList<Message> allMessages = new ArrayList<>();
+        allMessages.addAll(messages);
+        allMessages.addAll(other.messages);
+        return withReverseChronologicalOrder(allMessages);
     }
 
     public void forEachMessage(Consumer<Message> block) {
@@ -60,12 +59,5 @@ public class Timeline {
         return "Timeline{" +
                 "messages=" + messages +
                 '}';
-    }
-
-    public Timeline mergeWith(Timeline other) {
-        ArrayList<Message> allMessages = new ArrayList<>();
-        allMessages.addAll(messages);
-        allMessages.addAll(other.messages);
-        return withReverseChronologicalOrder(allMessages);
     }
 }

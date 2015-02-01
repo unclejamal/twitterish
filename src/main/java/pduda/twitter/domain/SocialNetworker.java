@@ -1,8 +1,4 @@
-package pduda.twitter.domain.usecase;
-
-import pduda.twitter.domain.AccountName;
-import pduda.twitter.domain.Message;
-import pduda.twitter.domain.Timeline;
+package pduda.twitter.domain;
 
 import java.time.Instant;
 import java.util.ArrayList;
