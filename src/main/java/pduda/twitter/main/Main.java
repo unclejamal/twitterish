@@ -15,15 +15,12 @@ public class Main {
     }
 
     public void start() {
-        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-        PrintWriter out = new PrintWriter(System.out);
-
         new Thread(
                 new TwitterApplication(
                         new InMemorySocialNetworkers(),
                         new RealClock(),
-                        new ConsoleOutput(out),
-                        new ConsoleInput(in)
+                        new ConsoleOutput(new PrintWriter(System.out)),
+                        new ConsoleInput(new BufferedReader(new InputStreamReader(System.in)))
                 )
         ).start();
     }
