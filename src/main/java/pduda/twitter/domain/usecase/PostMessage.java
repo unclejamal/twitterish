@@ -14,6 +14,7 @@ public class PostMessage {
     }
 
     public void execute(AccountName accountName, String content) {
-        this.socialNetworkers.getOrCreateSocialNetworker(accountName).postMessageWithContent(content, clock.instant());
+        SocialNetworker socialNetworker = this.socialNetworkers.getOrCreateSocialNetworker(accountName);
+        socialNetworker.postMessageWithContent(content, clock.instant());
     }
 }
