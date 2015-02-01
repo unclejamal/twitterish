@@ -2,10 +2,20 @@ package pduda.twitter.domain;
 
 import java.util.List;
 import java.util.function.Consumer;
-import java.util.stream.Stream;
+
+import static java.util.Comparator.comparing;
+import static java.util.stream.Collectors.toList;
 
 public class Timeline {
     private List<Message> messages;
+
+    public static Timeline withReverseChronologicalOrder(List<Message> messages) {
+        return new Timeline(
+                messages.stream()
+                        .sorted(comparing(Message::getPublicationDate).reversed())
+                        .collect(toList())
+        );
+    }
 
     public Timeline(List<Message> messages) {
         this.messages = messages;

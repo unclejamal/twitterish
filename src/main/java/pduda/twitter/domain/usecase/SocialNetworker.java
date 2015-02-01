@@ -5,9 +5,6 @@ import pduda.twitter.domain.Timeline;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-
-import static java.util.Comparator.comparing;
 
 public class SocialNetworker {
 
@@ -18,12 +15,7 @@ public class SocialNetworker {
     }
 
     public Timeline getPersonalTimeline() {
-        return new Timeline(
-                messages.stream()
-                        .sorted(comparing(Message::getPublicationDate).reversed())
-                        .collect(Collectors.toList()
-                        )
-        );
+        return Timeline.withReverseChronologicalOrder(messages);
     }
 
     public void postMessage(Message message) {
