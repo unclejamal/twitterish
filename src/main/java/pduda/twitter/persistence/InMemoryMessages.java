@@ -11,8 +11,6 @@ import java.util.List;
 import java.util.Map;
 
 import static java.util.Arrays.asList;
-import static java.util.Comparator.comparing;
-import static java.util.stream.Collectors.toList;
 
 public class InMemoryMessages implements Messages {
 
@@ -36,13 +34,5 @@ public class InMemoryMessages implements Messages {
         } else {
             socialNetworkers.get(message.getAccountName()).postMessage(message);
         }
-    }
-
-    @Override
-    public List<Message> getMessagesChronologicallyDescendingFor(AccountName accountName) {
-        return messages.stream()
-                .filter(m -> m.hasBeenPostedBy(accountName))
-                .sorted(comparing(Message::getPublicationDate).reversed())
-                .collect(toList());
     }
 }
