@@ -13,8 +13,6 @@ import pduda.twitter.ui.readtimeline.ReadTimelineView;
 import pduda.twitter.ui.wall.WallController;
 import pduda.twitter.ui.wall.WallView;
 
-import java.io.IOException;
-
 public class TwitterApplication implements Runnable {
     private final ConsoleOutput output;
     private CompositeConsoleRouter compositeConsoleRouter;
@@ -56,12 +54,7 @@ public class TwitterApplication implements Runnable {
     public void run() {
         while (true) {
             output.showPrompt();
-            String command;
-            try {
-                command = input.getCommand();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+            String command = input.getCommand();
             // TODO put into the router?
             if (command.equals("quit")) {
                 break;

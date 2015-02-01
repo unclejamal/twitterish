@@ -10,7 +10,11 @@ public class ConsoleInput {
         this.in = in;
     }
 
-    public String getCommand() throws IOException {
-        return in.readLine();
+    public String getCommand() {
+        try {
+            return in.readLine();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
