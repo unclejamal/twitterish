@@ -15,6 +15,6 @@ public class PostMessage {
     }
 
     public void execute(AccountName accountName, String message) {
-        this.messages.addMessage(new Message(accountName, message, clock.instant()));
+        this.messages.getOrCreateSocialNetworker(accountName).postMessage(new Message(accountName, message, clock.instant()));
     }
 }

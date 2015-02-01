@@ -32,4 +32,13 @@ public class InMemoryMessages implements Messages {
             socialNetworkers.get(message.getAccountName()).postMessage(message);
         }
     }
+
+    @Override
+    public SocialNetworker getOrCreateSocialNetworker(AccountName accountName) {
+        if (!socialNetworkers.containsKey(accountName)) {
+            socialNetworkers.put(accountName, new SocialNetworker(new ArrayList<>(asList())));
+        }
+
+        return socialNetworkers.get(accountName);
+    }
 }

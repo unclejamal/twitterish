@@ -7,4 +7,6 @@ public interface Messages {
     SocialNetworker getSocialNetworker(AccountName accountName);
 
     void addMessage(Message message);
+
+    SocialNetworker getOrCreateSocialNetworker(AccountName accountName);
 }
