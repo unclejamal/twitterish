@@ -1,6 +1,5 @@
 package pduda.twitter.journey;
 
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.junit.Before;
 import org.junit.Test;
 import pduda.twitter.main.TwitterApplication;
@@ -50,7 +49,6 @@ public class WallUiTest {
     }
 
     @Test(timeout = 1000)
-    @Ignore
     public void wallForASocialNetworkerWhoFollowsSomebody() throws Exception {
         enter("Alice -> I love the weather today", whenTimeIs(someDay().atTime(9, 55)));
         enter("Bob -> Damn! We lost!", whenTimeIs(someDay().atTime(9, 58)));
@@ -82,7 +80,8 @@ public class WallUiTest {
     }
 
     private void enter(String command) throws IOException {
-        enter(command, () -> {});
+        enter(command, () -> {
+        });
     }
 
     private void read(String expectedOutput) throws IOException {
