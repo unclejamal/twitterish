@@ -12,6 +12,6 @@ public class Wall {
     }
 
     public Timeline execute(AccountName accountName) {
-        return socialNetworkers.getSocialNetworker(accountName).getPersonalTimeline();
+        return socialNetworkers.getSocialNetworker(accountName).getWall();
     }
 }

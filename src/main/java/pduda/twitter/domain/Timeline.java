@@ -1,5 +1,6 @@
 package pduda.twitter.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -19,6 +20,10 @@ public class Timeline {
 
     public Timeline(List<Message> messages) {
         this.messages = messages;
+    }
+
+    public Timeline() {
+        this.messages = new ArrayList<>();
     }
 
     public boolean hasMessages() {
@@ -55,5 +60,12 @@ public class Timeline {
         return "Timeline{" +
                 "messages=" + messages +
                 '}';
+    }
+
+    public Timeline mergeWith(Timeline other) {
+        ArrayList<Message> allMessages = new ArrayList<>();
+        allMessages.addAll(messages);
+        allMessages.addAll(other.messages);
+        return withReverseChronologicalOrder(allMessages);
     }
 }

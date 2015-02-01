@@ -16,16 +16,34 @@ import static pduda.twitter.util.ObjectMother.somePublicationDate;
 
 public class SocialNetworkerTest {
 
-    private SocialNetworker socialNetworker;
+    private SocialNetworker bob;
 
     @Before
     public void setUp() {
-        socialNetworker = new SocialNetworker();
+        bob = new SocialNetworker();
     }
 
     @Test
     public void hasAnEmptyPersonalTimelineWhenNoMessagesPosted() {
-        assertThat(socialNetworker.getPersonalTimeline(), is(new Timeline(emptyList())));
+        assertThat(bob.getPersonalTimeline(), is(new Timeline(emptyList())));
+    }
+
+    @Test
+    public void hasAnEmptyWall() {
+        assertThat(bob.getWall(), is(new Timeline(emptyList())));
+    }
+
+    @Test
+    public void hasAWall() {
+        SocialNetworker alice = new SocialNetworker();
+        Message alicesMessage = new Message(new AccountName("alice"), "content1", somePublicationDate());
+        alice.postMessage(alicesMessage);
+        Message bobsMessage = new Message(new AccountName("bob"), "content2", somePublicationDate());
+        bob.postMessage(bobsMessage);
+
+        bob.follow(alice);
+
+        assertThat(bob.getWall(), is(Timeline.withReverseChronologicalOrder(asList(bobsMessage, alicesMessage))));
     }
 
     @Test
@@ -34,10 +52,10 @@ public class SocialNetworkerTest {
         Message soonerMessage = new Message(new AccountName("bob"), "content1", publicationDate);
         Message laterMessage = new Message(new AccountName("bob"), "content2", publicationDate.plusMillis(1000));
 
-        socialNetworker.postMessage(soonerMessage);
-        socialNetworker.postMessage(laterMessage);
+        bob.postMessage(soonerMessage);
+        bob.postMessage(laterMessage);
 
-        assertThat(socialNetworker.getPersonalTimeline(), is(Timeline.withReverseChronologicalOrder(asList(soonerMessage, laterMessage))));
+        assertThat(bob.getPersonalTimeline(), is(Timeline.withReverseChronologicalOrder(asList(soonerMessage, laterMessage))));
     }
 
 }
