@@ -1,7 +1,6 @@
 package pduda.twitter.endtoend;
 
 import org.junit.Before;
-import org.junit.Test;
 import pduda.twitter.main.TwitterApplication;
 import pduda.twitter.persistence.InMemorySocialNetworkers;
 import pduda.twitter.ui.ConsoleOutput;
@@ -14,13 +13,12 @@ import static java.lang.System.lineSeparator;
 import static java.time.ZoneOffset.UTC;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
-import static pduda.twitter.util.ObjectMother.someDay;
 
-public class ReadingTimelineUiTest {
+public abstract class EndToEndTest {
     public static final String PROMPT = "> ";
+    protected FixedClock clock;
     private PrintWriter inWriter;
     private BufferedReader outReader;
-    private FixedClock clock;
 
     @Before
     public void startApplication() throws Exception {
@@ -36,38 +34,25 @@ public class ReadingTimelineUiTest {
         new Thread(new TwitterApplication(in, new InMemorySocialNetworkers(), clock, new ConsoleOutput(out))).start();
     }
 
-    @Test(timeout = 1000)
-    public void postMessagesToTheTimeline() throws Exception {
-        enter("Alice -> I love the weather today", whenTimeIs(someDay().atTime(9, 55)));
-        enter("Bob -> Damn! We lost!", whenTimeIs(someDay().atTime(9, 58)));
-        enter("Bob -> Good game though.", whenTimeIs(someDay().atTime(9, 59)));
-
-        enter("Alice", whenTimeIs(someDay().atTime(10, 0)));
-        assertOutputLines(
-                "I love the weather today (5 minutes ago)"
-        );
-
-        enter("Bob");
-        assertOutputLines(
-                "Good game though. (1 minute ago)",
-                "Damn! We lost! (2 minutes ago)"
-        );
-
-        enter("quit");
-    }
-
-    private Runnable whenTimeIs(LocalDateTime localDateTime) {
+    protected Runnable whenTimeIs(LocalDateTime localDateTime) {
         return () -> clock.fixAt(localDateTime.toInstant(UTC));
     }
 
-    private void enter(String command, Runnable context) throws IOException {
+    protected void enter(String command, Runnable context) throws IOException {
         read(PROMPT);
         context.run();
         write(command);
     }
 
-    private void enter(String command) throws IOException {
-        enter(command, () -> {});
+    protected void enter(String command) throws IOException {
+        enter(command, () -> {
+        });
+    }
+
+    protected void assertOutputLines(String... expectedOutput) throws IOException {
+        for (String line : expectedOutput) {
+            read(line + lineSeparator());
+        }
     }
 
     private void read(String expectedOutput) throws IOException {
@@ -75,12 +60,6 @@ public class ReadingTimelineUiTest {
         char[] buffer = new char[length];
         outReader.read(buffer, 0, length);
         assertThat(String.valueOf(buffer), is(expectedOutput));
-    }
-
-    private void assertOutputLines(String... expectedOutput) throws IOException {
-        for (String line : expectedOutput) {
-            read(line + lineSeparator());
-        }
     }
 
     private void write(String input) {
