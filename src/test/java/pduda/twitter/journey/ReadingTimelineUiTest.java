@@ -5,7 +5,7 @@ import org.junit.Test;
 import pduda.twitter.domain.AccountName;
 import pduda.twitter.domain.Message;
 import pduda.twitter.main.TwitterApplication;
-import pduda.twitter.persistence.InMemoryMessages;
+import pduda.twitter.persistence.InMemorySocialNetworkers;
 import pduda.twitter.ui.ConsoleOutput;
 import pduda.twitter.util.FixedClock;
 
@@ -24,7 +24,7 @@ public class ReadingTimelineUiTest {
     public static final AccountName bob = new AccountName("Bob");
     private PrintWriter inWriter;
     private BufferedReader outReader;
-    private InMemoryMessages messages;
+    private InMemorySocialNetworkers messages;
     private FixedClock clock;
 
     @Before
@@ -37,7 +37,7 @@ public class ReadingTimelineUiTest {
         BufferedReader in = new BufferedReader(new InputStreamReader(new PipedInputStream(inStream)));
         PrintWriter out = new PrintWriter(new PipedOutputStream(outStream), true);
 
-        messages = new InMemoryMessages();
+        messages = new InMemorySocialNetworkers();
         clock = new FixedClock();
         new Thread(new TwitterApplication(in, messages, clock, new ConsoleOutput(out))).start();
     }
@@ -46,9 +46,9 @@ public class ReadingTimelineUiTest {
     public void readTimeline() throws IOException {
         clock.fixAt(someDay().atTime(10, 0).toInstant(UTC));
 
-        messages.addMessage(new Message(alice, "I love the weather today", someDay().atTime(9, 55).toInstant(UTC)));
-        messages.addMessage(new Message(bob, "Damn! We lost!", someDay().atTime(9, 58).toInstant(UTC)));
-        messages.addMessage(new Message(bob, "Good game though.", someDay().atTime(9, 59).toInstant(UTC)));
+        messages.getOrCreateSocialNetworker(alice).postMessage(new Message(alice, "I love the weather today", someDay().atTime(9, 55).toInstant(UTC)));
+        messages.getOrCreateSocialNetworker(bob).postMessage(new Message(bob, "Damn! We lost!", someDay().atTime(9, 58).toInstant(UTC)));
+        messages.getOrCreateSocialNetworker(bob).postMessage(new Message(bob, "Good game though.", someDay().atTime(9, 59).toInstant(UTC)));
 
         enter("Alice");
         assertOutputLines(

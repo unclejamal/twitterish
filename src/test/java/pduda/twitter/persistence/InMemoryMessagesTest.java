@@ -5,12 +5,12 @@ import pduda.twitter.domain.AccountName;
 
 public class InMemoryMessagesTest {
 
-    private InMemoryMessages messages;
+    private InMemorySocialNetworkers messages;
     private AccountName bob;
 
     @Before
     public void setUp() throws Exception {
-        messages = new InMemoryMessages();
+        messages = new InMemorySocialNetworkers();
         bob = new AccountName("bob");
     }
 }

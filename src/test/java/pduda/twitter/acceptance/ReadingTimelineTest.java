@@ -7,10 +7,10 @@ import org.junit.Before;
 import org.junit.Test;
 import pduda.twitter.domain.AccountName;
 import pduda.twitter.domain.Message;
-import pduda.twitter.domain.Messages;
+import pduda.twitter.domain.SocialNetworkers;
 import pduda.twitter.domain.Timeline;
 import pduda.twitter.domain.usecase.ReadTimeline;
-import pduda.twitter.persistence.InMemoryMessages;
+import pduda.twitter.persistence.InMemorySocialNetworkers;
 
 import java.util.Arrays;
 import java.util.List;
@@ -22,7 +22,7 @@ import static pduda.twitter.util.ObjectMother.someDay;
 public class ReadingTimelineTest {
 
     private ReadTimeline readTimeline;
-    private Messages messages;
+    private SocialNetworkers socialNetworkers;
     private AccountName bob;
     private AccountName alice;
 
@@ -30,16 +30,16 @@ public class ReadingTimelineTest {
     public void setUp() throws Exception {
         alice = new AccountName("Alice");
         bob = new AccountName("Bob");
-        messages = new InMemoryMessages();
+        socialNetworkers = new InMemorySocialNetworkers();
 
-        readTimeline = new ReadTimeline(messages);
+        readTimeline = new ReadTimeline(socialNetworkers);
     }
 
     @Test
     public void showsTimelineWithMessagesPreviouslyAddedByASocialNetworker() {
-        messages.addMessage(new Message(alice, "I love the weather today", someDay().atTime(9, 55).toInstant(UTC)));
-        messages.addMessage(new Message(bob, "Damn! We lost!", someDay().atTime(9, 58).toInstant(UTC)));
-        messages.addMessage(new Message(bob, "Good game though.", someDay().atTime(9, 59).toInstant(UTC)));
+        socialNetworkers.getOrCreateSocialNetworker(alice).postMessage(new Message(alice, "I love the weather today", someDay().atTime(9, 55).toInstant(UTC)));
+        socialNetworkers.getOrCreateSocialNetworker(bob).postMessage(new Message(bob, "Damn! We lost!", someDay().atTime(9, 58).toInstant(UTC)));
+        socialNetworkers.getOrCreateSocialNetworker(bob).postMessage(new Message(bob, "Good game though.", someDay().atTime(9, 59).toInstant(UTC)));
 
         Timeline timeline = readTimeline.execute(bob);
         assertThat(timeline, hasMessages(

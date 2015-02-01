@@ -1,6 +1,6 @@
 package pduda.twitter.main;
 
-import pduda.twitter.domain.Messages;
+import pduda.twitter.domain.SocialNetworkers;
 import pduda.twitter.domain.usecase.PostMessage;
 import pduda.twitter.domain.usecase.ReadTimeline;
 import pduda.twitter.domain.usecase.Wall;
@@ -23,14 +23,14 @@ public class TwitterApplication implements Runnable {
     private final ConsoleOutput output;
     private CompositeConsoleRouter compositeConsoleRouter;
 
-    public TwitterApplication(BufferedReader in, Messages messages, Clock clock, ConsoleOutput output) {
+    public TwitterApplication(BufferedReader in, SocialNetworkers socialNetworkers, Clock clock, ConsoleOutput output) {
         this.in = in;
         this.output = output;
         TimeElapsedView timeElapsedView = new TimeElapsedView(clock);
 
         this.compositeConsoleRouter = new CompositeConsoleRouter(
                 new ReadTimelineController(
-                        new ReadTimeline(messages),
+                        new ReadTimeline(socialNetworkers),
                         new ReadTimelineView(
                                 output,
                                 timeElapsedView
@@ -38,12 +38,12 @@ public class TwitterApplication implements Runnable {
                 ),
                 new PostMessageController(
                         new PostMessage(
-                                messages,
+                                socialNetworkers,
                                 clock
                         )
                 ),
                 new WallController(
-                        new Wall(messages),
+                        new Wall(socialNetworkers),
                         new WallView(
                                 output,
                                 timeElapsedView

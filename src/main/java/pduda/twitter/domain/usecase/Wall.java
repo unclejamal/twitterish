@@ -1,17 +1,17 @@
 package pduda.twitter.domain.usecase;
 
 import pduda.twitter.domain.AccountName;
-import pduda.twitter.domain.Messages;
+import pduda.twitter.domain.SocialNetworkers;
 import pduda.twitter.domain.Timeline;
 
 public class Wall {
-    private final Messages messages;
+    private final SocialNetworkers socialNetworkers;
 
-    public Wall(Messages messages) {
-        this.messages = messages;
+    public Wall(SocialNetworkers socialNetworkers) {
+        this.socialNetworkers = socialNetworkers;
     }
 
     public Timeline execute(AccountName accountName) {
-        return messages.getSocialNetworker(accountName).getPersonalTimeline();
+        return socialNetworkers.getSocialNetworker(accountName).getPersonalTimeline();
     }
 }

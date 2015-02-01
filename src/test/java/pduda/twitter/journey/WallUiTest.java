@@ -3,7 +3,7 @@ package pduda.twitter.journey;
 import org.junit.Before;
 import org.junit.Test;
 import pduda.twitter.main.TwitterApplication;
-import pduda.twitter.persistence.InMemoryMessages;
+import pduda.twitter.persistence.InMemorySocialNetworkers;
 import pduda.twitter.ui.ConsoleOutput;
 import pduda.twitter.util.FixedClock;
 
@@ -33,7 +33,7 @@ public class WallUiTest {
         PrintWriter out = new PrintWriter(new PipedOutputStream(outStream), true);
 
         clock = new FixedClock();
-        new Thread(new TwitterApplication(in, new InMemoryMessages(), clock, new ConsoleOutput(out))).start();
+        new Thread(new TwitterApplication(in, new InMemorySocialNetworkers(), clock, new ConsoleOutput(out))).start();
     }
 
     @Test(timeout = 1000)

@@ -4,10 +4,10 @@ import org.junit.Before;
 import org.junit.Test;
 import pduda.twitter.domain.AccountName;
 import pduda.twitter.domain.Message;
-import pduda.twitter.domain.Messages;
+import pduda.twitter.domain.SocialNetworkers;
 import pduda.twitter.domain.Timeline;
 import pduda.twitter.domain.usecase.PostMessage;
-import pduda.twitter.persistence.InMemoryMessages;
+import pduda.twitter.persistence.InMemorySocialNetworkers;
 import pduda.twitter.util.FixedClock;
 
 import static java.time.ZoneOffset.UTC;
@@ -19,17 +19,17 @@ import static pduda.twitter.util.ObjectMother.someDay;
 public class PostingMessageTest {
 
     private PostMessage postMessage;
-    private Messages messages;
+    private SocialNetworkers socialNetworkers;
     private AccountName alice;
     private FixedClock clock;
 
     @Before
     public void setUp() throws Exception {
         alice = new AccountName("Alice");
-        messages = new InMemoryMessages();
+        socialNetworkers = new InMemorySocialNetworkers();
         clock = new FixedClock();
 
-        postMessage = new PostMessage(messages, clock);
+        postMessage = new PostMessage(socialNetworkers, clock);
     }
 
     @Test
@@ -38,7 +38,7 @@ public class PostingMessageTest {
 
         postMessage.execute(alice, "ZOMG! I love cats!");
 
-        assertThat(messages.getSocialNetworker(alice).getPersonalTimeline(), is(new Timeline(asList(
+        assertThat(socialNetworkers.getSocialNetworker(alice).getPersonalTimeline(), is(new Timeline(asList(
                 new Message(alice, "ZOMG! I love cats!", someDay().atTime(10, 0).toInstant(UTC))))));
     }
 }

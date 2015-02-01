@@ -1,19 +1,19 @@
 package pduda.twitter.domain.usecase;
 
 import pduda.twitter.domain.AccountName;
-import pduda.twitter.domain.Messages;
+import pduda.twitter.domain.SocialNetworkers;
 import pduda.twitter.domain.Timeline;
 
 public class ReadTimeline {
 
-    private Messages messages;
+    private SocialNetworkers socialNetworkers;
 
-    public ReadTimeline(Messages messages) {
-        this.messages = messages;
+    public ReadTimeline(SocialNetworkers socialNetworkers) {
+        this.socialNetworkers = socialNetworkers;
     }
 
     public Timeline execute(AccountName accountName) {
-        return messages.getSocialNetworker(accountName).getPersonalTimeline();
+        return socialNetworkers.getSocialNetworker(accountName).getPersonalTimeline();
     }
 
 }
