@@ -3,6 +3,7 @@ package pduda.twitter.domain.usecase;
 import pduda.twitter.domain.Message;
 import pduda.twitter.domain.Timeline;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -12,8 +13,8 @@ public class SocialNetworker {
 
     private final List<Message> messages;
 
-    public SocialNetworker(List<Message> messages) {
-        this.messages = messages;
+    public SocialNetworker() {
+        this.messages = new ArrayList<>();
     }
 
     public Timeline getPersonalTimeline() {
