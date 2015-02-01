@@ -50,7 +50,10 @@ public class TwitterApplication implements Runnable {
                                 timeElapsedView
                         )
                 ),
-                new FollowController(new FollowSocialNetworker(socialNetworkers)));
+                new FollowController(
+                        new FollowSocialNetworker(socialNetworkers)
+                )
+        );
     }
 
     @Override
