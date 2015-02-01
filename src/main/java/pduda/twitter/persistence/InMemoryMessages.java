@@ -1,8 +1,8 @@
 package pduda.twitter.persistence;
 
+import pduda.twitter.domain.AccountName;
 import pduda.twitter.domain.Message;
 import pduda.twitter.domain.Messages;
-import pduda.twitter.domain.SocialNetworker;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,9 +21,9 @@ public class InMemoryMessages implements Messages {
         messages.add(message);
     }
 
-    public List<Message> getMessagesFor(SocialNetworker socialNetworker) {
+    public List<Message> getMessagesFor(AccountName accountName) {
         return messages.stream()
-                .filter(m -> m.hasBeenPostedBy(socialNetworker))
+                .filter(m -> m.hasBeenPostedBy(accountName))
                 .collect(toList());
     }
 }

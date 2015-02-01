@@ -3,8 +3,8 @@ package pduda.twitter.ui.wall;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
+import pduda.twitter.domain.AccountName;
 import pduda.twitter.domain.Message;
-import pduda.twitter.domain.SocialNetworker;
 import pduda.twitter.domain.Timeline;
 import pduda.twitter.ui.ConsoleOutput;
 import pduda.twitter.ui.TimeElapsedView;
@@ -41,7 +41,7 @@ public class WallViewTest {
         Mockito.when(timeElapsedView.since(publicationDate)).thenReturn("3 minutes ago");
 
         view.present(new Timeline(asList(
-                new Message(new SocialNetworker("Bob"), "content", publicationDate))));
+                new Message(new AccountName("Bob"), "content", publicationDate))));
 
         Mockito.verify(output).writeLineAndFlush("Bob - content (3 minutes ago)");
     }

@@ -4,7 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
-import pduda.twitter.domain.SocialNetworker;
+import pduda.twitter.domain.AccountName;
 import pduda.twitter.ui.follow.FollowController;
 import pduda.twitter.ui.postmessage.PostMessageController;
 import pduda.twitter.ui.readtimeline.ReadTimelineController;
@@ -15,13 +15,13 @@ import static org.hamcrest.Matchers.is;
 
 public class CompositeConsoleRouterTest {
 
-    private static final SocialNetworker alice = new SocialNetworker("Alice");
-    private static final SocialNetworker bob = new SocialNetworker("Bob");
+    private static final AccountName alice = new AccountName("Alice");
+    private static final AccountName bob = new AccountName("Bob");
     private ReadTimelineController readTimelineController;
     private PostMessageController postMessageController;
     private WallController wallController;
     private FollowController followController;
-    private ArgumentCaptor<SocialNetworker> actualSocialNetworker;
+    private ArgumentCaptor<AccountName> actualSocialNetworker;
     private ArgumentCaptor<String> actualMessage;
 
     private CompositeConsoleRouter compositeConsoleRouter;
@@ -39,7 +39,7 @@ public class CompositeConsoleRouterTest {
                 followController
         );
 
-        actualSocialNetworker = ArgumentCaptor.forClass(SocialNetworker.class);
+        actualSocialNetworker = ArgumentCaptor.forClass(AccountName.class);
         actualMessage = ArgumentCaptor.forClass(String.class);
     }
 
@@ -70,8 +70,8 @@ public class CompositeConsoleRouterTest {
 
     @Test
     public void routesFollowCommands() {
-        ArgumentCaptor<SocialNetworker> actualFollower = ArgumentCaptor.forClass(SocialNetworker.class);
-        ArgumentCaptor<SocialNetworker> actualFollowee = ArgumentCaptor.forClass(SocialNetworker.class);
+        ArgumentCaptor<AccountName> actualFollower = ArgumentCaptor.forClass(AccountName.class);
+        ArgumentCaptor<AccountName> actualFollowee = ArgumentCaptor.forClass(AccountName.class);
 
         compositeConsoleRouter.route("Alice follows Bob");
 

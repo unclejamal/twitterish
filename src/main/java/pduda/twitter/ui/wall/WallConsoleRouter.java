@@ -1,6 +1,6 @@
 package pduda.twitter.ui.wall;
 
-import pduda.twitter.domain.SocialNetworker;
+import pduda.twitter.domain.AccountName;
 import pduda.twitter.ui.ConsoleRouter;
 
 import java.util.regex.Matcher;
@@ -19,8 +19,8 @@ public class WallConsoleRouter implements ConsoleRouter {
     public void route(String command) {
         Pattern wallPattern = PATTERN;
         Matcher matcher = getMatcher(command, wallPattern);
-        String socialNetworker = matcher.group(1);
-        controller.execute(new SocialNetworker(socialNetworker));
+        String accountName = matcher.group(1);
+        controller.execute(new AccountName(accountName));
     }
 
     public Matcher getMatcher(String command, Pattern postMessagePattern) {

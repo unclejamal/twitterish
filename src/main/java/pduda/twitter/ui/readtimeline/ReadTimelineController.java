@@ -1,6 +1,6 @@
 package pduda.twitter.ui.readtimeline;
 
-import pduda.twitter.domain.SocialNetworker;
+import pduda.twitter.domain.AccountName;
 import pduda.twitter.domain.Timeline;
 import pduda.twitter.domain.usecase.ReadTimeline;
 
@@ -14,8 +14,8 @@ public class ReadTimelineController {
         this.readTimelineView = readTimelineView;
     }
 
-    public void execute(SocialNetworker socialNetworker) {
-        Timeline timeline = readTimeline.execute(socialNetworker);
+    public void execute(AccountName accountName) {
+        Timeline timeline = readTimeline.execute(accountName);
         readTimelineView.present(timeline);
     }
 }

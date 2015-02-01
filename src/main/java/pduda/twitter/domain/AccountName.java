@@ -1,9 +1,9 @@
 package pduda.twitter.domain;
 
-public class SocialNetworker {
+public class AccountName {
     private final String username;
 
-    public SocialNetworker(String username) {
+    public AccountName(String username) {
         this.username = username;
     }
 
@@ -16,7 +16,7 @@ public class SocialNetworker {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        SocialNetworker that = (SocialNetworker) o;
+        AccountName that = (AccountName) o;
 
         if (username != null ? !username.equals(that.username) : that.username != null) return false;
 
@@ -30,7 +30,7 @@ public class SocialNetworker {
 
     @Override
     public String toString() {
-        return "SocialNetworker{" +
+        return "AccountName{" +
                 "username='" + username + '\'' +
                 '}';
     }

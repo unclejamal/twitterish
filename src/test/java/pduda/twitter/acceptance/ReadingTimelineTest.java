@@ -5,9 +5,9 @@ import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 import org.junit.Before;
 import org.junit.Test;
+import pduda.twitter.domain.AccountName;
 import pduda.twitter.domain.Message;
 import pduda.twitter.domain.Messages;
-import pduda.twitter.domain.SocialNetworker;
 import pduda.twitter.domain.Timeline;
 import pduda.twitter.domain.usecase.ReadTimeline;
 import pduda.twitter.persistence.InMemoryMessages;
@@ -23,13 +23,13 @@ public class ReadingTimelineTest {
 
     private ReadTimeline readTimeline;
     private Messages messages;
-    private SocialNetworker bob;
-    private SocialNetworker alice;
+    private AccountName bob;
+    private AccountName alice;
 
     @Before
     public void setUp() throws Exception {
-        alice = new SocialNetworker("Alice");
-        bob = new SocialNetworker("Bob");
+        alice = new AccountName("Alice");
+        bob = new AccountName("Bob");
         messages = new InMemoryMessages();
 
         readTimeline = new ReadTimeline(messages);

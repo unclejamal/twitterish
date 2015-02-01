@@ -1,6 +1,6 @@
 package pduda.twitter.ui.postmessage;
 
-import pduda.twitter.domain.SocialNetworker;
+import pduda.twitter.domain.AccountName;
 import pduda.twitter.domain.usecase.PostMessage;
 
 public class PostMessageController {
@@ -10,7 +10,7 @@ public class PostMessageController {
         this.postMessage = postMessage;
     }
 
-    public void execute(SocialNetworker socialNetworker, String message) {
-        postMessage.execute(socialNetworker, message);
+    public void execute(AccountName accountName, String message) {
+        postMessage.execute(accountName, message);
     }
 }

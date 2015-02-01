@@ -1,9 +1,9 @@
 package pduda.twitter.domain.usecase;
 
-import pduda.twitter.domain.SocialNetworker;
+import pduda.twitter.domain.AccountName;
 
 public class FollowSocialNetworker {
-    public void execute(SocialNetworker follower, SocialNetworker followee) {
+    public void execute(AccountName follower, AccountName followee) {
 
     }
 }

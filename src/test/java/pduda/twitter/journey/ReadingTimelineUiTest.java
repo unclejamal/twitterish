@@ -2,8 +2,8 @@ package pduda.twitter.journey;
 
 import org.junit.Before;
 import org.junit.Test;
+import pduda.twitter.domain.AccountName;
 import pduda.twitter.domain.Message;
-import pduda.twitter.domain.SocialNetworker;
 import pduda.twitter.main.TwitterApplication;
 import pduda.twitter.persistence.InMemoryMessages;
 import pduda.twitter.ui.ConsoleOutput;
@@ -20,8 +20,8 @@ import static pduda.twitter.util.ObjectMother.someDay;
 // TODO probably can be removed since PostingMessagesToTimelineUiTest does the job
 public class ReadingTimelineUiTest {
     public static final String PROMPT = "> ";
-    public static final SocialNetworker alice = new SocialNetworker("Alice");
-    public static final SocialNetworker bob = new SocialNetworker("Bob");
+    public static final AccountName alice = new AccountName("Alice");
+    public static final AccountName bob = new AccountName("Bob");
     private PrintWriter inWriter;
     private BufferedReader outReader;
     private InMemoryMessages messages;

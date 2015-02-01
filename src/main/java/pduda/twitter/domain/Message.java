@@ -3,22 +3,22 @@ package pduda.twitter.domain;
 import java.time.Instant;
 
 public class Message {
-    private final SocialNetworker socialNetworker;
+    private final AccountName accountName;
     private final String content;
     private final Instant publicationDate;
 
-    public Message(SocialNetworker socialNetworker, String content, Instant publicationDate) {
-        this.socialNetworker = socialNetworker;
+    public Message(AccountName accountName, String content, Instant publicationDate) {
+        this.accountName = accountName;
         this.content = content;
         this.publicationDate = publicationDate;
     }
 
-    public boolean hasBeenPostedBy(SocialNetworker socialNetworker) {
-        return socialNetworker.equals(this.socialNetworker);
+    public boolean hasBeenPostedBy(AccountName accountName) {
+        return accountName.equals(this.accountName);
     }
 
-    public SocialNetworker getSocialNetworker() {
-        return socialNetworker;
+    public AccountName getAccountName() {
+        return accountName;
     }
 
     public String getContent() {
@@ -38,7 +38,7 @@ public class Message {
 
         if (content != null ? !content.equals(message.content) : message.content != null) return false;
         if (publicationDate != null ? !publicationDate.equals(message.publicationDate) : message.publicationDate != null) return false;
-        if (socialNetworker != null ? !socialNetworker.equals(message.socialNetworker) : message.socialNetworker != null)
+        if (accountName != null ? !accountName.equals(message.accountName) : message.accountName != null)
             return false;
 
         return true;
@@ -46,7 +46,7 @@ public class Message {
 
     @Override
     public int hashCode() {
-        int result = socialNetworker != null ? socialNetworker.hashCode() : 0;
+        int result = accountName != null ? accountName.hashCode() : 0;
         result = 31 * result + (content != null ? content.hashCode() : 0);
         result = 31 * result + (publicationDate != null ? publicationDate.hashCode() : 0);
         return result;
@@ -55,7 +55,7 @@ public class Message {
     @Override
     public String toString() {
         return "Message{" +
-                "socialNetworker=" + socialNetworker +
+                "socialNetworker=" + accountName +
                 ", content='" + content + '\'' +
                 ", publicationDate=" + publicationDate +
                 '}';

@@ -2,9 +2,9 @@ package pduda.twitter.acceptance;
 
 import org.junit.Before;
 import org.junit.Test;
+import pduda.twitter.domain.AccountName;
 import pduda.twitter.domain.Message;
 import pduda.twitter.domain.Messages;
-import pduda.twitter.domain.SocialNetworker;
 import pduda.twitter.domain.usecase.PostMessage;
 import pduda.twitter.persistence.InMemoryMessages;
 import pduda.twitter.util.FixedClock;
@@ -19,12 +19,12 @@ public class PostingMessageTest {
 
     private PostMessage postMessage;
     private Messages messages;
-    private SocialNetworker alice;
+    private AccountName alice;
     private FixedClock clock;
 
     @Before
     public void setUp() throws Exception {
-        alice = new SocialNetworker("Alice");
+        alice = new AccountName("Alice");
         messages = new InMemoryMessages();
         clock = new FixedClock();
 

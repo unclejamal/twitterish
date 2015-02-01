@@ -1,6 +1,6 @@
 package pduda.twitter.ui.postmessage;
 
-import pduda.twitter.domain.SocialNetworker;
+import pduda.twitter.domain.AccountName;
 import pduda.twitter.ui.ConsoleRouter;
 
 import java.util.regex.Matcher;
@@ -17,9 +17,9 @@ public class PostMessageConsoleRouter implements ConsoleRouter {
     @Override
     public void route(String command) {
         Matcher matcher = getMatcher(command, PATTERN);
-        String socialNetworker = matcher.group(1);
+        String accountName = matcher.group(1);
         String message = matcher.group(2);
-        controller.execute(new SocialNetworker(socialNetworker), message);
+        controller.execute(new AccountName(accountName), message);
     }
 
     public Matcher getMatcher(String command, Pattern postMessagePattern) {

@@ -1,6 +1,6 @@
 package pduda.twitter.ui.follow;
 
-import pduda.twitter.domain.SocialNetworker;
+import pduda.twitter.domain.AccountName;
 import pduda.twitter.ui.ConsoleRouter;
 
 import java.util.regex.Matcher;
@@ -19,7 +19,7 @@ public class FollowConsoleRouter implements ConsoleRouter {
         Matcher matcher = getMatcher(command, PATTERN);
         String follower = matcher.group(1);
         String followee = matcher.group(2);
-        controller.execute(new SocialNetworker(follower), new SocialNetworker(followee));
+        controller.execute(new AccountName(follower), new AccountName(followee));
     }
 
     public Matcher getMatcher(String command, Pattern postMessagePattern) {

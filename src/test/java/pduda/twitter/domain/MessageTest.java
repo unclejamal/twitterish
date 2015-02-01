@@ -9,14 +9,14 @@ import static pduda.twitter.util.ObjectMother.somePublicationDate;
 
 public class MessageTest {
 
-    private SocialNetworker alice;
-    private SocialNetworker bob;
+    private AccountName alice;
+    private AccountName bob;
     private Message messagePostedByBob;
 
     @Before
     public void setUp() throws Exception {
-        alice = new SocialNetworker("alice");
-        bob = new SocialNetworker("bob");
+        alice = new AccountName("alice");
+        bob = new AccountName("bob");
         messagePostedByBob = new Message(bob, "content", somePublicationDate());
     }
 

@@ -2,8 +2,8 @@ package pduda.twitter.persistence;
 
 import org.junit.Before;
 import org.junit.Test;
+import pduda.twitter.domain.AccountName;
 import pduda.twitter.domain.Message;
-import pduda.twitter.domain.SocialNetworker;
 
 import java.util.Arrays;
 import java.util.List;
@@ -16,12 +16,12 @@ import static pduda.twitter.util.ObjectMother.somePublicationDate;
 public class InMemoryMessagesTest {
 
     private InMemoryMessages messages;
-    private SocialNetworker bob;
+    private AccountName bob;
 
     @Before
     public void setUp() throws Exception {
         messages = new InMemoryMessages();
-        bob = new SocialNetworker("bob");
+        bob = new AccountName("bob");
     }
 
     @Test

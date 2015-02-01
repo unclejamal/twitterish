@@ -3,8 +3,8 @@ package pduda.twitter.ui.readtimeline;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
+import pduda.twitter.domain.AccountName;
 import pduda.twitter.domain.Message;
-import pduda.twitter.domain.SocialNetworker;
 import pduda.twitter.domain.Timeline;
 import pduda.twitter.ui.ConsoleOutput;
 import pduda.twitter.ui.TimeElapsedView;
@@ -41,7 +41,7 @@ public class ReadTimelineViewTest {
         Mockito.when(timeElapsedView.since(publicationDate)).thenReturn("3 minutes ago");
 
         view.present(new Timeline(asList(
-                new Message(new SocialNetworker("bob"), "content", publicationDate))));
+                new Message(new AccountName("bob"), "content", publicationDate))));
 
         Mockito.verify(output).writeLineAndFlush("content (3 minutes ago)");
     }
