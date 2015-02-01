@@ -1,11 +1,7 @@
-package pduda.twitter.domain.usecase;
+package pduda.twitter.domain;
 
 import org.junit.Before;
 import org.junit.Test;
-import pduda.twitter.domain.AccountName;
-import pduda.twitter.domain.Message;
-import pduda.twitter.domain.SocialNetworker;
-import pduda.twitter.domain.Timeline;
 
 import java.time.Instant;
 
