@@ -7,18 +7,15 @@ import pduda.twitter.domain.usecase.SocialNetworker;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import static java.util.Arrays.asList;
 
 public class InMemoryMessages implements Messages {
 
-    private final List<Message> messages;
     private final Map<AccountName, SocialNetworker> socialNetworkers;
 
     public InMemoryMessages() {
-        messages = new ArrayList<>();
         socialNetworkers = new HashMap<>();
     }
 
