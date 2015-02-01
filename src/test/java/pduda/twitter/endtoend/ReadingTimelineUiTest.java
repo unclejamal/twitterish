@@ -16,7 +16,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static pduda.twitter.util.ObjectMother.someDay;
 
-public class PostingMessagesToTimelineUiTest {
+public class ReadingTimelineUiTest {
     public static final String PROMPT = "> ";
     private PrintWriter inWriter;
     private BufferedReader outReader;
