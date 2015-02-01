@@ -3,22 +3,22 @@ package pduda.twitter.domain;
 import java.time.Instant;
 
 public class Message {
-    private final AccountName accountName;
+    private final AccountName author;
     private final String content;
     private final Instant publicationDate;
 
-    public Message(AccountName accountName, String content, Instant publicationDate) {
-        this.accountName = accountName;
+    public Message(AccountName author, String content, Instant publicationDate) {
+        this.author = author;
         this.content = content;
         this.publicationDate = publicationDate;
     }
 
     public boolean hasBeenPostedBy(AccountName accountName) {
-        return accountName.equals(this.accountName);
+        return accountName.equals(this.author);
     }
 
-    public AccountName getAccountName() {
-        return accountName;
+    public AccountName getAuthor() {
+        return author;
     }
 
     public String getContent() {
@@ -38,7 +38,7 @@ public class Message {
 
         if (content != null ? !content.equals(message.content) : message.content != null) return false;
         if (publicationDate != null ? !publicationDate.equals(message.publicationDate) : message.publicationDate != null) return false;
-        if (accountName != null ? !accountName.equals(message.accountName) : message.accountName != null)
+        if (author != null ? !author.equals(message.author) : message.author != null)
             return false;
 
         return true;
@@ -46,7 +46,7 @@ public class Message {
 
     @Override
     public int hashCode() {
-        int result = accountName != null ? accountName.hashCode() : 0;
+        int result = author != null ? author.hashCode() : 0;
         result = 31 * result + (content != null ? content.hashCode() : 0);
         result = 31 * result + (publicationDate != null ? publicationDate.hashCode() : 0);
         return result;
@@ -55,7 +55,7 @@ public class Message {
     @Override
     public String toString() {
         return "Message{" +
-                "socialNetworker=" + accountName +
+                "author=" + author +
                 ", content='" + content + '\'' +
                 ", publicationDate=" + publicationDate +
                 '}';

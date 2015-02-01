@@ -18,7 +18,7 @@ public class WallView {
                 output.writeLineAndFlush(String.format(
                         "%s - %s (%s)",
                         // TODO train wrack?
-                        message.getAccountName().getUsername(),
+                        message.getAuthor().getUsername(),
                         message.getContent(),
                         timeElapsedView.since(message.getPublicationDate())
                 )));
