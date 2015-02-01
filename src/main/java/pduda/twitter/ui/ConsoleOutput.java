@@ -4,6 +4,7 @@ import java.io.PrintWriter;
 
 public class ConsoleOutput {
 
+    public static final String PROMPT = "> ";
     private final PrintWriter out;
 
     public ConsoleOutput(PrintWriter out) {
@@ -16,7 +17,7 @@ public class ConsoleOutput {
     }
 
     public void showPrompt() {
-        out.print("> ");
+        out.print(PROMPT);
         out.flush();
     }
 }

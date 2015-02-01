@@ -15,7 +15,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
 public abstract class EndToEndTest {
-    public static final String PROMPT = "> ";
     protected FixedClock clock;
     private PrintWriter inWriter;
     private BufferedReader outReader;
@@ -39,7 +38,7 @@ public abstract class EndToEndTest {
     }
 
     protected void enter(String command, Runnable context) throws IOException {
-        read(PROMPT);
+        read(ConsoleOutput.PROMPT);
         context.run();
         write(command);
     }
