@@ -49,8 +49,8 @@ public class PostingMessagesToTimelineUiTest {
 
         enter("Bob");
         assertOutputLines(
-                "Damn! We lost! (2 minutes ago)",
-                "Good game though. (1 minute ago)"
+                "Good game though. (1 minute ago)",
+                "Damn! We lost! (2 minutes ago)"
         );
 
         enter("quit");

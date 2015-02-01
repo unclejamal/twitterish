@@ -37,7 +37,7 @@ public class PostingMessageTest {
 
         postMessage.execute(alice, "ZOMG! I love cats!");
 
-        assertThat(messages.getMessagesFor(alice), is(asList(
+        assertThat(messages.getMessagesChronologicallyDescendingFor(alice), is(asList(
                 new Message(alice, "ZOMG! I love cats!", someDay().atTime(10, 0).toInstant(UTC)))));
     }
 }

@@ -13,6 +13,6 @@ public class ReadTimeline {
     }
 
     public Timeline execute(AccountName accountName) {
-        return new Timeline(messages.getMessagesFor(accountName));
+        return new Timeline(messages.getMessagesChronologicallyDescendingFor(accountName));
     }
 }

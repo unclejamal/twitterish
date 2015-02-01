@@ -49,8 +49,8 @@ public class ReadingTimelineTest {
 
         Timeline timeline = readTimeline.execute(bob);
         assertThat(timeline, hasMessages(
-                new Message(bob, "Damn! We lost!", someDay().atTime(9, 58).toInstant(UTC)),
-                new Message(bob, "Good game though.", someDay().atTime(9, 59).toInstant(UTC))));
+                new Message(bob, "Good game though.", someDay().atTime(9, 59).toInstant(UTC)),
+                new Message(bob, "Damn! We lost!", someDay().atTime(9, 58).toInstant(UTC))));
     }
 
     private Matcher<? super Timeline> hasMessages(final Message... messages) {

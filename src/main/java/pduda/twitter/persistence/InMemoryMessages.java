@@ -5,6 +5,7 @@ import pduda.twitter.domain.Message;
 import pduda.twitter.domain.Messages;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
@@ -21,9 +22,10 @@ public class InMemoryMessages implements Messages {
         messages.add(message);
     }
 
-    public List<Message> getMessagesFor(AccountName accountName) {
+    public List<Message> getMessagesChronologicallyDescendingFor(AccountName accountName) {
         return messages.stream()
                 .filter(m -> m.hasBeenPostedBy(accountName))
+                .sorted(Comparator.comparing(Message::getPublicationDate).reversed())
                 .collect(toList());
     }
 }
