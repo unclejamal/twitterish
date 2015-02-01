@@ -10,8 +10,10 @@ public class FollowSocialNetworker {
         this.socialNetworkers = socialNetworkers;
     }
 
-    public void execute(AccountName follower, AccountName followee) {
-        socialNetworkers.getSocialNetworker(follower).follow(socialNetworkers.getSocialNetworker(followee));
+    public void execute(AccountName followersAccountName, AccountName followeesAccountName) {
+        SocialNetworker follower = socialNetworkers.getSocialNetworker(followersAccountName);
+        SocialNetworker followee = socialNetworkers.getSocialNetworker(followeesAccountName);
+        follower.follow(followee);
 
     }
 }
