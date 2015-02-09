@@ -30,7 +30,7 @@ public class SocialNetworkerTest {
     }
 
     @Test
-    public void hasAWall() {
+    public void hasAWallWithMessagesPostedPersonallyAndByFollowees() {
         SocialNetworker alice = new SocialNetworker(new AccountName("alice"));
         Instant alicesMessageTime = somePublicationDate();
         alice.postMessageWithContent("alices content", alicesMessageTime);
@@ -47,14 +47,12 @@ public class SocialNetworkerTest {
 
     @Test
     public void hasPersonalTimelineAfterMessagesPosted() {
-        Instant publicationDate = somePublicationDate();
-
-        bob.postMessageWithContent("content1", publicationDate);
-        bob.postMessageWithContent("content2", publicationDate.plusSeconds(1));
+        bob.postMessageWithContent("content1", somePublicationDate());
+        bob.postMessageWithContent("content2", somePublicationDate().plusSeconds(1));
 
         assertThat(bob.getPersonalTimeline(), is(Timeline.withReverseChronologicalOrder(asList(
-                new Message(new AccountName("bob"), "content1", publicationDate),
-                new Message(new AccountName("bob"), "content2", publicationDate.plusSeconds(1))
+                new Message(new AccountName("bob"), "content1", somePublicationDate()),
+                new Message(new AccountName("bob"), "content2", somePublicationDate().plusSeconds(1))
         ))));
     }
 
