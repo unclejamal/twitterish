@@ -13,11 +13,11 @@ public class TimeElapsedView {
 
     public String since(Instant date) {
         Instant instant = clock.instant();
-        Duration duration = Duration.between(date, instant);
-        long elapsedSeconds = duration.get(ChronoUnit.SECONDS);
+        Duration elapsedTime = Duration.between(date, instant);
+        long elapsedSeconds = elapsedTime.get(ChronoUnit.SECONDS);
 
         if (elapsedSeconds >= 60) {
-            return presentAsMinutes(duration);
+            return presentAsMinutes(elapsedTime);
         }
 
         return presentAsSeconds(elapsedSeconds);
