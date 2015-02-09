@@ -6,7 +6,6 @@ import org.junit.Test;
 import java.time.Instant;
 
 import static java.util.Arrays.asList;
-import static java.util.Collections.emptyList;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static pduda.twitter.util.ObjectMother.somePublicationDate;
@@ -22,12 +21,12 @@ public class SocialNetworkerTest {
 
     @Test
     public void hasAnEmptyPersonalTimelineWhenNoMessagesPosted() {
-        assertThat(bob.getPersonalTimeline(), is(new Timeline(emptyList())));
+        assertThat(bob.getPersonalTimeline(), is(Timeline.empty()));
     }
 
     @Test
     public void hasAnEmptyWall() {
-        assertThat(bob.getWall(), is(new Timeline(emptyList())));
+        assertThat(bob.getWall(), is(Timeline.empty()));
     }
 
     @Test

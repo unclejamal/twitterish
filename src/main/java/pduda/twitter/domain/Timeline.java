@@ -19,12 +19,12 @@ public class Timeline {
         );
     }
 
-    public Timeline(List<Message> messages) {
-        this.messages = messages;
+    public static Timeline empty() {
+        return new Timeline(new ArrayList<>());
     }
 
-    public Timeline() {
-        this(new ArrayList<>());
+    private Timeline(List<Message> messages) {
+        this.messages = messages;
     }
 
     public Timeline mergeWith(Timeline other) {

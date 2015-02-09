@@ -27,7 +27,7 @@ public class SocialNetworker {
     private Timeline getTimelineForFollowees() {
         return followes.stream()
                 .map(f -> f.getPersonalTimeline())
-                .reduce(new Timeline(), (t1, t2) -> t1.mergeWith(t2));
+                .reduce(Timeline.empty(), (t1, t2) -> t1.mergeWith(t2));
     }
 
     public void postMessageWithContent(String messageContent, Instant messageTime) {

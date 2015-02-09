@@ -12,7 +12,6 @@ import pduda.twitter.ui.TimeElapsedView;
 import java.time.Instant;
 
 import static java.util.Arrays.asList;
-import static java.util.Collections.emptyList;
 import static pduda.twitter.util.ObjectMother.somePublicationDate;
 
 public class WallViewTest {
@@ -31,7 +30,7 @@ public class WallViewTest {
 
     @Test
     public void doesNotOutputAnythingForAnEmptyTimeline() {
-        view.present(new Timeline(emptyList()));
+        view.present(Timeline.empty());
         Mockito.verifyZeroInteractions(output);
     }
 
@@ -40,7 +39,7 @@ public class WallViewTest {
         Instant publicationDate = somePublicationDate();
         Mockito.when(timeElapsedView.since(publicationDate)).thenReturn("3 minutes ago");
 
-        view.present(new Timeline(asList(
+        view.present(Timeline.withReverseChronologicalOrder(asList(
                 new Message(new AccountName("Bob"), "content", publicationDate))));
 
         Mockito.verify(output).writeLineAndFlush("Bob - content (3 minutes ago)");
