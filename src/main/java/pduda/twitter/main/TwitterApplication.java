@@ -57,7 +57,6 @@ public class TwitterApplication implements Runnable {
         while (true) {
             output.showPrompt();
             String command = input.getCommand();
-            // TODO put into the router?
             if (command.equals("quit")) {
                 break;
             }

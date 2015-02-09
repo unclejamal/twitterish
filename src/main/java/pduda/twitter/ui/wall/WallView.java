@@ -17,7 +17,6 @@ public class WallView {
         timeline.forEachMessage(message ->
                 output.writeLineAndFlush(String.format(
                         "%s - %s (%s)",
-                        // TODO train wrack?
                         message.getAuthor().getUsername(),
                         message.getContent(),
                         timeElapsedView.since(message.getPublicationDate())

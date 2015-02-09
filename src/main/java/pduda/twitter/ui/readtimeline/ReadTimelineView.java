@@ -14,13 +14,12 @@ public class ReadTimelineView {
     }
 
     public void present(Timeline timeline) {
-        timeline.forEachMessage(message -> {
-            output.writeLineAndFlush(String.format(
-                    "%s (%s)",
-                    message.getContent(),
-                    timeElapsedView.since(message.getPublicationDate())
-            ));
-        });
+        timeline.forEachMessage(message -> output.writeLineAndFlush(
+                String.format(
+                        "%s (%s)",
+                        message.getContent(),
+                        timeElapsedView.since(message.getPublicationDate())
+                )));
     }
 
 }
