@@ -1,20 +1,18 @@
 package pduda.twitter.domain;
 
 import java.time.Instant;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 public class SocialNetworker {
 
     private final AccountName accountName;
-    private final List<Message> messages;
+    private final Set<Message> messages;
     private final Set<SocialNetworker> followes;
 
     public SocialNetworker(AccountName accountName) {
         this.accountName = accountName;
-        this.messages = new ArrayList<>();
+        this.messages = new HashSet<>();
         this.followes = new HashSet<>();
     }
 
