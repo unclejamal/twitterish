@@ -8,12 +8,12 @@ public class SocialNetworker {
 
     private final AccountName accountName;
     private final Set<Message> messages;
-    private final Set<SocialNetworker> followes;
+    private final Set<SocialNetworker> followees;
 
     public SocialNetworker(AccountName accountName) {
         this.accountName = accountName;
         this.messages = new HashSet<>();
-        this.followes = new HashSet<>();
+        this.followees = new HashSet<>();
     }
 
     public Timeline getPersonalTimeline() {
@@ -25,7 +25,7 @@ public class SocialNetworker {
     }
 
     private Timeline getTimelineForFollowees() {
-        return followes.stream()
+        return followees.stream()
                 .map(f -> f.getPersonalTimeline())
                 .reduce(Timeline.empty(), (t1, t2) -> t1.mergeWith(t2));
     }
@@ -35,7 +35,7 @@ public class SocialNetworker {
     }
 
     public void follow(SocialNetworker followee) {
-        followes.add(followee);
+        followees.add(followee);
     }
 
     @Override
@@ -46,7 +46,7 @@ public class SocialNetworker {
         SocialNetworker that = (SocialNetworker) o;
 
         if (accountName != null ? !accountName.equals(that.accountName) : that.accountName != null) return false;
-        if (followes != null ? !followes.equals(that.followes) : that.followes != null) return false;
+        if (followees != null ? !followees.equals(that.followees) : that.followees != null) return false;
         if (messages != null ? !messages.equals(that.messages) : that.messages != null) return false;
 
         return true;
@@ -56,7 +56,7 @@ public class SocialNetworker {
     public int hashCode() {
         int result = accountName != null ? accountName.hashCode() : 0;
         result = 31 * result + (messages != null ? messages.hashCode() : 0);
-        result = 31 * result + (followes != null ? followes.hashCode() : 0);
+        result = 31 * result + (followees != null ? followees.hashCode() : 0);
         return result;
     }
 
@@ -65,7 +65,7 @@ public class SocialNetworker {
         return "SocialNetworker{" +
                 "accountName=" + accountName +
                 ", messages=" + messages +
-                ", followes=" + followes +
+                ", followees=" + followees +
                 '}';
     }
 }
