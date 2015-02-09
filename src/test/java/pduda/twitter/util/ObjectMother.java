@@ -5,12 +5,13 @@ import pduda.twitter.domain.AccountName;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.Year;
+import java.time.ZoneOffset;
 
 import static java.time.Month.JANUARY;
 
 public class ObjectMother {
     public static Instant somePublicationDate() {
-        return Instant.now();
+        return someDay().atTime(20 ,0).toInstant(ZoneOffset.UTC);
     }
 
     public static LocalDate someDay() {
