@@ -23,7 +23,7 @@ public class Timeline {
         return new Timeline(new ArrayList<>());
     }
 
-    private Timeline(List<Message> messages) {
+    Timeline(List<Message> messages) {
         this.messages = messages;
     }
 
