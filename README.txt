@@ -1,3 +1,9 @@
+Running the application
+=======================
+
+Run the class pduda.twitter.main.Main
+
+
 Assumptions
 ===========
 
